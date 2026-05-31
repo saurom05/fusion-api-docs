@@ -1,0 +1,3909 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Fusion API",
+    "description": "API para gestion de servicios - Version 1",
+    "contact": {
+      "name": "Fusion ISP",
+      "email": "rmenendez@teccial.com"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/Adicional/crear": {
+      "post": {
+        "tags": [
+          "Adicional"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdicionalCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdicionalCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdicionalCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Adicional/combo": {
+      "get": {
+        "tags": [
+          "Adicional"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdicionalResumenAuxDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdicionalResumenAuxDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdicionalResumenAuxDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Autentica a un usuario utilizando su email o nombre de usuario y contraseña.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/nodo/agregar-estado": {
+      "post": {
+        "tags": [
+          "Catalogo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoEstadoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoEstadoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoEstadoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/agregar-estado": {
+      "post": {
+        "tags": [
+          "Catalogo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaEstadoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaEstadoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaEstadoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/estado-persona/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PersonaEstadoResumenDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PersonaEstadoResumenDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PersonaEstadoResumenDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/proveedor/agregar-categoria": {
+      "post": {
+        "tags": [
+          "Catalogo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorCategoriaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorCategoriaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorCategoriaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/planes/tipo-tecnologia/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/promociones/tipo-promocion/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/planes/tipo-velocidad/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/tipo-identificacion/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/tipo-referencia/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/asesor/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/clientes/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Contrato/crear": {
+      "post": {
+        "tags": [
+          "Contrato"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Contrato/{id}": {
+      "put": {
+        "tags": [
+          "Contrato"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Contrato"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contrato": {
+      "get": {
+        "tags": [
+          "Contrato"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Empresa/crear": {
+      "post": {
+        "tags": [
+          "Empresa"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmpresaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Meta/webhook": {
+      "get": {
+        "tags": [
+          "Meta"
+        ],
+        "parameters": [
+          {
+            "name": "hub.mode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hub.verify_token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hub.challenge",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Meta"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatsAppPayload"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatsAppPayload"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatsAppPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/Nodo/crear": {
+      "post": {
+        "tags": [
+          "Nodo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/Nodo": {
+      "get": {
+        "tags": [
+          "Nodo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/Nodo/combo": {
+      "get": {
+        "tags": [
+          "Nodo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodoResumenDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodoResumenDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodoResumenDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/PlanesInternet/crear": {
+      "post": {
+        "tags": [
+          "PlanesInternet"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/PlanesInternet/{id}": {
+      "put": {
+        "tags": [
+          "PlanesInternet"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PlanesInternet"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetalleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetalleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDetalleDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/PlanesInternet": {
+      "get": {
+        "tags": [
+          "PlanesInternet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanDetalleDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanDetalleDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanDetalleDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/PlanesInternet/combo": {
+      "get": {
+        "tags": [
+          "PlanesInternet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanResumidoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanResumidoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanResumidoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Promociones/crear": {
+      "post": {
+        "tags": [
+          "Promociones"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromocionDescuentoCrearDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromocionDescuentoCrearDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromocionDescuentoCrearDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Promociones/{id}": {
+      "put": {
+        "tags": [
+          "Promociones"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromocionDescuentoUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromocionDescuentoUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromocionDescuentoUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Promociones"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromocionDescuentoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromocionDescuentoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromocionDescuentoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Promociones/plan/{id}": {
+      "get": {
+        "tags": [
+          "Promociones"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromocionResumenDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromocionResumenDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromocionResumenDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Promociones": {
+      "get": {
+        "tags": [
+          "Promociones"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromocionDescuentoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromocionDescuentoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PromocionDescuentoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Prospecto/crear": {
+      "post": {
+        "tags": [
+          "Prospecto"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaProspectoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaProspectoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaProspectoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Prospecto/{id}": {
+      "put": {
+        "tags": [
+          "Prospecto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaProspectoUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaProspectoUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonaProspectoUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Prospecto/{id}/gestionar": {
+      "post": {
+        "tags": [
+          "Prospecto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Prospecto/{personaid}": {
+      "get": {
+        "tags": [
+          "Prospecto"
+        ],
+        "parameters": [
+          {
+            "name": "personaid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProspectoDetalleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProspectoDetalleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProspectoDetalleDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Prospecto": {
+      "get": {
+        "tags": [
+          "Prospecto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProspectoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProspectoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProspectoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Proveedor/crear": {
+      "post": {
+        "tags": [
+          "Proveedor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tareas/descargar-planes-wisphub": {
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Test": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/TestDev/planes-internet": {
+      "get": {
+        "tags": [
+          "TestDev"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ubicacion/provincias": {
+      "get": {
+        "tags": [
+          "Ubicacion"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ubicacion/provincia/{provinciaId}/cantones": {
+      "get": {
+        "tags": [
+          "Ubicacion"
+        ],
+        "parameters": [
+          {
+            "name": "provinciaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ubicacion/canton/{cantonId}/parroquias": {
+      "get": {
+        "tags": [
+          "Ubicacion"
+        ],
+        "parameters": [
+          {
+            "name": "cantonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ubicacion/canton/{cantonId}/ciudad": {
+      "get": {
+        "tags": [
+          "Ubicacion"
+        ],
+        "parameters": [
+          {
+            "name": "cantonId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ubicacion/ciudad": {
+      "get": {
+        "tags": [
+          "Ubicacion"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ubicacion/ciudad/crear": {
+      "post": {
+        "tags": [
+          "Ubicacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CiudadCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CiudadCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CiudadCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdicionalCreateDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoAdicional"
+          },
+          "costoProveedor": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioLista": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdicionalDecuentoDigitalDto": {
+        "type": "object",
+        "properties": {
+          "porcentajeDescuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadMaxima": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adicionalId": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "mesesDescuento": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "esPermanente": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdicionalDecuentoDto": {
+        "type": "object",
+        "properties": {
+          "porcentajeDescuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadMaxima": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adicionalId": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdicionalResumenAuxDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoAdicional"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CiudadCreateDto": {
+        "type": "object",
+        "properties": {
+          "dpaCiudad": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoCreateDto": {
+        "type": "object",
+        "properties": {
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccionInstalacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "oportunidadId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "esGrupoPrioritaria": {
+            "type": "boolean"
+          },
+          "duracionMeses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "esRenovacionAutomatica": {
+            "type": "boolean"
+          },
+          "mesesPermanenciaMinima": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tienePermanencia": {
+            "type": "boolean"
+          },
+          "pagoEnOficina": {
+            "type": "boolean"
+          },
+          "pagoPorTransferencia": {
+            "type": "boolean"
+          },
+          "pagoPorDebito": {
+            "type": "boolean"
+          },
+          "pagoPorTarjeta": {
+            "type": "boolean"
+          },
+          "pagoPorDebitoDetalle": {
+            "$ref": "#/components/schemas/ContratoMetodoBancoCreateDto"
+          },
+          "pagoPorTarjetaDetalle": {
+            "$ref": "#/components/schemas/ContratoMetodoTarjetaCreateDto"
+          },
+          "aceptaMediacion": {
+            "type": "boolean"
+          },
+          "incluyeEmpaquetamiento": {
+            "type": "boolean"
+          },
+          "planId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promocionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "porcentajeAplicado": {
+            "type": "number",
+            "format": "double"
+          },
+          "mesesDescuento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviciosAdicionalesIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "redAcceso": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          },
+          "tipoCuenta": {
+            "$ref": "#/components/schemas/TipoCuentas"
+          },
+          "nivelComparticion": {
+            "type": "string",
+            "nullable": true
+          },
+          "otrosServicios": {
+            "type": "boolean"
+          },
+          "otrosServiciosDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "costoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "descuentoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "plazoInstalacionHoras": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autorizaInformacionPersonal": {
+            "type": "boolean"
+          },
+          "diaPago": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaValidezAutorizacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoMetodoBancoCreateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "bancoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bancoDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroCuenta": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCuenta": {
+            "$ref": "#/components/schemas/TipoCuenta"
+          },
+          "identificacionAbonado": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailDeAbonado": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoMetodoTarjetaCreateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "bancoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bancoDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarjeta": {
+            "$ref": "#/components/schemas/MarcaTarjeta"
+          },
+          "lastFourDigits": {
+            "type": "string",
+            "nullable": true
+          },
+          "expirationMonth": {
+            "type": "string",
+            "nullable": true
+          },
+          "expirationYear": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardHolderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "abonadoEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "abonadoIdentificacion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccionInstalacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "oportunidadId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "esGrupoPrioritaria": {
+            "type": "boolean"
+          },
+          "duracionMeses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "esRenovacionAutomatica": {
+            "type": "boolean"
+          },
+          "mesesPermanenciaMinima": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tienePermanencia": {
+            "type": "boolean"
+          },
+          "pagoEnOficina": {
+            "type": "boolean"
+          },
+          "pagoPorTransferencia": {
+            "type": "boolean"
+          },
+          "pagoPorDebito": {
+            "type": "boolean"
+          },
+          "pagoPorTarjeta": {
+            "type": "boolean"
+          },
+          "aceptaMediacion": {
+            "type": "boolean"
+          },
+          "incluyeEmpaquetamiento": {
+            "type": "boolean"
+          },
+          "redAcceso": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          },
+          "tipoCuenta": {
+            "$ref": "#/components/schemas/TipoCuentas"
+          },
+          "nivelComparticion": {
+            "type": "string",
+            "nullable": true
+          },
+          "otrosServicios": {
+            "type": "boolean"
+          },
+          "otrosServiciosDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "costoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "descuentoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "plazoInstalacionHoras": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valorPendienteInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorProrrateoMensual": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "autorizaInformacionPersonal": {
+            "type": "boolean"
+          },
+          "contratoEstado": {
+            "$ref": "#/components/schemas/EstadoContrato"
+          },
+          "diaPago": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaActivacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "planIdSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planServicioIdSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promocionIdSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "megasSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaValidezAutorizacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "pagoDetalleTransferenciaJson": {
+            "type": "string",
+            "nullable": true
+          },
+          "pagoDetalleDebitoJson": {
+            "type": "string",
+            "nullable": true
+          },
+          "pagoDetalleTarjetaJson": {
+            "type": "string",
+            "nullable": true
+          },
+          "contratoBeneficioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datoAbonado": {
+            "$ref": "#/components/schemas/ProspectoSuscriptorContratoDto"
+          },
+          "planId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "promocionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promocionDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "porcentajeAplicado": {
+            "type": "number",
+            "format": "double"
+          },
+          "mesesDescuento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pagoPorDebitoDetalle": {
+            "$ref": "#/components/schemas/ContratoMetodoBancoCreateDto"
+          },
+          "pagoPorTarjetaDetalle": {
+            "$ref": "#/components/schemas/ContratoMetodoTarjetaCreateDto"
+          },
+          "adicionalesFisicosIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "adicionalesDigitalesIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "fechaInstalacion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoUpdateDto": {
+        "type": "object",
+        "properties": {
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccionInstalacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "oportunidadId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "esGrupoPrioritaria": {
+            "type": "boolean"
+          },
+          "duracionMeses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "esRenovacionAutomatica": {
+            "type": "boolean"
+          },
+          "mesesPermanenciaMinima": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tienePermanencia": {
+            "type": "boolean"
+          },
+          "pagoEnOficina": {
+            "type": "boolean"
+          },
+          "pagoPorTransferencia": {
+            "type": "boolean"
+          },
+          "pagoPorDebito": {
+            "type": "boolean"
+          },
+          "pagoPorTarjeta": {
+            "type": "boolean"
+          },
+          "pagoPorDebitoDetalle": {
+            "$ref": "#/components/schemas/ContratoMetodoBancoCreateDto"
+          },
+          "pagoPorTarjetaDetalle": {
+            "$ref": "#/components/schemas/ContratoMetodoTarjetaCreateDto"
+          },
+          "aceptaMediacion": {
+            "type": "boolean"
+          },
+          "incluyeEmpaquetamiento": {
+            "type": "boolean"
+          },
+          "planId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promocionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "porcentajeAplicado": {
+            "type": "number",
+            "format": "double"
+          },
+          "mesesDescuento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviciosAdicionalesIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "redAcceso": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          },
+          "tipoCuenta": {
+            "$ref": "#/components/schemas/TipoCuentas"
+          },
+          "nivelComparticion": {
+            "type": "string",
+            "nullable": true
+          },
+          "otrosServicios": {
+            "type": "boolean"
+          },
+          "otrosServiciosDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "costoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "descuentoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "plazoInstalacionHoras": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "autorizaInformacionPersonal": {
+            "type": "boolean"
+          },
+          "diaPago": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaValidezAutorizacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoBeneficioId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmpresaCreateDto": {
+        "type": "object",
+        "properties": {
+          "ruc": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "sitioWeb": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFacturaUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstadoContrato": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EstadoFasesProspecto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoValidacion"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstadoPersona": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EstadoProspecto": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EstadoValidacion": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "LoginDto": {
+        "required": [
+          "password",
+          "usuario"
+        ],
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "rememberMe": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarcaTarjeta": {
+        "enum": [
+          "Visa",
+          "Mastercard",
+          "AmericanExpress",
+          "DinersClub"
+        ],
+        "type": "string"
+      },
+      "NodoCreateDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "proveedorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoNodoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "publicId": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "proveedorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoNodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodoEstadoCreateDto": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodoResumenDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonaEstadoCreateDto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "colorHex": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonaEstadoResumenDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonaProspectoCreateDto": {
+        "required": [
+          "apellido",
+          "direccion",
+          "dni",
+          "email",
+          "nombre",
+          "referenciaTipo",
+          "telefono",
+          "tipoIdentificacion"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoIdentificacion": {
+            "$ref": "#/components/schemas/TipoIdentificacion"
+          },
+          "dni": {
+            "maxLength": 20,
+            "minLength": 10,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "apellido": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "telefono": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "direccion": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "referencia": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "coordenadas": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "provinciaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "observacion": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "asesorAcercamientoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "scoreBuro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenciaTipo": {
+            "$ref": "#/components/schemas/TipoReferencia"
+          },
+          "referidoPorPersonaId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonaProspectoUpdateDto": {
+        "required": [
+          "apellido",
+          "direccion",
+          "dni",
+          "email",
+          "nombre",
+          "referenciaTipo",
+          "telefono",
+          "tipoIdentificacion"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoIdentificacion": {
+            "$ref": "#/components/schemas/TipoIdentificacion"
+          },
+          "dni": {
+            "maxLength": 20,
+            "minLength": 10,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "apellido": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "telefono": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "direccion": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "referencia": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "coordenadas": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "provinciaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "observacion": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "asesorAcercamientoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "scoreBuro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenciaTipo": {
+            "$ref": "#/components/schemas/TipoReferencia"
+          },
+          "referidoPorPersonaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccionInstalacionId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanCreateDto": {
+        "required": [
+          "descripcion",
+          "estadoTecnologia",
+          "planMegas",
+          "precioBase",
+          "tipoVelocidad",
+          "velocidadBajada",
+          "velocidadSubida"
+        ],
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "detallesPlan": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "planMegas": {
+            "maximum": 100000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "velocidadSubida": {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "velocidadBajada": {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoTecnologia": {
+            "$ref": "#/components/schemas/TecnologiaEstado"
+          },
+          "tipoVelocidad": {
+            "$ref": "#/components/schemas/VelocidadTipo"
+          },
+          "precioBase": {
+            "maximum": 999999.99,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanDetalleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "planMegas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "velocidadSubida": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "velocidadBajada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoTecnologia": {
+            "$ref": "#/components/schemas/TecnologiaEstado"
+          },
+          "tipoVelocidad": {
+            "$ref": "#/components/schemas/VelocidadTipo"
+          },
+          "precioBase": {
+            "type": "number",
+            "format": "double"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "detallesPlan": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanResumidoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanUpdateDto": {
+        "required": [
+          "descripcion",
+          "estadoTecnologia",
+          "planMegas",
+          "precioBase",
+          "tipoVelocidad",
+          "velocidadBajada",
+          "velocidadSubida"
+        ],
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "detallesPlan": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "planMegas": {
+            "maximum": 100000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "velocidadSubida": {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "velocidadBajada": {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoTecnologia": {
+            "$ref": "#/components/schemas/TecnologiaEstado"
+          },
+          "tipoVelocidad": {
+            "$ref": "#/components/schemas/VelocidadTipo"
+          },
+          "precioBase": {
+            "maximum": 999999.99,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromocionDescuentoCrearDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/PromocionTipo"
+          },
+          "tipoFijoPorcentaje": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "porcentajeDescuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "porcentajeDescuentoHasta": {
+            "type": "number",
+            "format": "double"
+          },
+          "mesesDuracion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "duracionIndefenidaCheck": {
+            "type": "boolean"
+          },
+          "fechaVigenciaDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaVigenciaHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vigenciaCheck": {
+            "type": "boolean"
+          },
+          "limiteUsos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limiteCheck": {
+            "type": "boolean"
+          },
+          "montoMinimoFactura": {
+            "type": "number",
+            "format": "double"
+          },
+          "esAcumulableDescuento": {
+            "type": "boolean"
+          },
+          "prioridadDescuento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planesIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "aplicaA": {
+            "$ref": "#/components/schemas/PublicoObjetivo"
+          },
+          "descripcionCondicion": {
+            "type": "string",
+            "nullable": true
+          },
+          "esAdicionalFisico": {
+            "type": "boolean"
+          },
+          "adicionalFisico": {
+            "$ref": "#/components/schemas/AdicionalDecuentoDto"
+          },
+          "esAdicionalDigital": {
+            "type": "boolean"
+          },
+          "adicionalDigital": {
+            "$ref": "#/components/schemas/AdicionalDecuentoDigitalDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromocionDescuentoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/PromocionTipo"
+          },
+          "tipoFijoPorcentaje": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "porcentajeDescuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "porcentajeDescuentoHasta": {
+            "type": "number",
+            "format": "double"
+          },
+          "mesesDuracion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "duracionIndefenidaCheck": {
+            "type": "boolean"
+          },
+          "fechaVigenciaDesde": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaVigenciaHasta": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigenciaCheck": {
+            "type": "boolean"
+          },
+          "limiteUsos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limiteCheck": {
+            "type": "boolean"
+          },
+          "montoMinimoFactura": {
+            "type": "number",
+            "format": "double"
+          },
+          "esAcumulableDescuento": {
+            "type": "boolean"
+          },
+          "prioridadDescuento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aplicaA": {
+            "$ref": "#/components/schemas/PublicoObjetivo"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "planesIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "descripcionCondicion": {
+            "type": "string",
+            "nullable": true
+          },
+          "esAdicionalFisico": {
+            "type": "boolean"
+          },
+          "adicionalFisico": {
+            "$ref": "#/components/schemas/AdicionalDecuentoDto"
+          },
+          "esAdicionalDigital": {
+            "type": "boolean"
+          },
+          "adicionalDigital": {
+            "$ref": "#/components/schemas/AdicionalDecuentoDigitalDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromocionDescuentoUpdateDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/PromocionTipo"
+          },
+          "tipoFijoPorcentaje": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "porcentajeDescuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "porcentajeDescuentoHasta": {
+            "type": "number",
+            "format": "double"
+          },
+          "mesesDuracion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "duracionIndefenidaCheck": {
+            "type": "boolean"
+          },
+          "fechaVigenciaDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaVigenciaHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vigenciaCheck": {
+            "type": "boolean"
+          },
+          "limiteUsos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limiteCheck": {
+            "type": "boolean"
+          },
+          "montoMinimoFactura": {
+            "type": "number",
+            "format": "double"
+          },
+          "esAcumulableDescuento": {
+            "type": "boolean"
+          },
+          "prioridadDescuento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planesIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "aplicaA": {
+            "$ref": "#/components/schemas/PublicoObjetivo"
+          },
+          "descripcionCondicion": {
+            "type": "string",
+            "nullable": true
+          },
+          "esAdicionalFisico": {
+            "type": "boolean"
+          },
+          "adicionalFisico": {
+            "$ref": "#/components/schemas/AdicionalDecuentoDto"
+          },
+          "esAdicionalDigital": {
+            "type": "boolean"
+          },
+          "adicionalDigital": {
+            "$ref": "#/components/schemas/AdicionalDecuentoDigitalDto"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromocionResumenDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromocionTipo": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProspectoDetalleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "asesorAcercamientoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "scoreBuro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenciaTipo": {
+            "$ref": "#/components/schemas/TipoReferencia"
+          },
+          "prospectoEstado": {
+            "$ref": "#/components/schemas/EstadoProspecto"
+          },
+          "referenciaTipoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "referidoPorPersonaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "validaContrato": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faseContrato": {
+            "$ref": "#/components/schemas/EstadoFasesProspecto"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoPersona": {
+            "$ref": "#/components/schemas/TipoPersona"
+          },
+          "tipoPersonaDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoIdentificacion": {
+            "$ref": "#/components/schemas/TipoIdentificacion"
+          },
+          "tipoIdentificacionDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "personaEstado": {
+            "$ref": "#/components/schemas/EstadoPersona"
+          },
+          "personaEstadoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "validaIdentidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faseIdentidad": {
+            "$ref": "#/components/schemas/EstadoFasesProspecto"
+          },
+          "validaBiometria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faseBiometria": {
+            "$ref": "#/components/schemas/EstadoFasesProspecto"
+          },
+          "direccionInstalacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "provinciaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "provinciaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantonDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "estadoPersonaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoPersonaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "rowVersion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProspectoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "asesorAcercamientoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "scoreBuro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenciaTipo": {
+            "$ref": "#/components/schemas/TipoReferencia"
+          },
+          "prospectoEstado": {
+            "$ref": "#/components/schemas/EstadoProspecto"
+          },
+          "referenciaTipoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "referidoPorPersonaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "validaContrato": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faseContrato": {
+            "$ref": "#/components/schemas/EstadoFasesProspecto"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoPersona": {
+            "$ref": "#/components/schemas/TipoPersona"
+          },
+          "tipoPersonaDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoIdentificacion": {
+            "$ref": "#/components/schemas/TipoIdentificacion"
+          },
+          "tipoIdentificacionDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "personaEstado": {
+            "$ref": "#/components/schemas/EstadoPersona"
+          },
+          "personaEstadoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "validaIdentidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faseIdentidad": {
+            "$ref": "#/components/schemas/EstadoFasesProspecto"
+          },
+          "validaBiometria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faseBiometria": {
+            "$ref": "#/components/schemas/EstadoFasesProspecto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProspectoSuscriptorContratoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "provinciaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantonDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudadDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "parroquiaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodoDescripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProveedorCategoriaCreateDto": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProveedorCreateDto": {
+        "type": "object",
+        "properties": {
+          "ruc": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailContacto": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "proveedorCategoriaId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicoObjetivo": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RedesAcceso": {
+        "enum": [
+          "ParDeCobre",
+          "Coaxial",
+          "Otros",
+          "FibraOptica",
+          "Inalambrico"
+        ],
+        "type": "string"
+      },
+      "TecnologiaEstado": {
+        "enum": [
+          "Otro",
+          "GponFtth",
+          "Hfc",
+          "Ftth"
+        ],
+        "type": "string"
+      },
+      "TipoAdicional": {
+        "enum": [
+          "Fisico",
+          "Digital"
+        ],
+        "type": "string"
+      },
+      "TipoCuenta": {
+        "enum": [
+          "Ahorro",
+          "Corriente"
+        ],
+        "type": "string"
+      },
+      "TipoCuentas": {
+        "enum": [
+          "Residencial",
+          "Cibercafe",
+          "Corporativo",
+          "OtrosTipos"
+        ],
+        "type": "string"
+      },
+      "TipoIdentificacion": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TipoPersona": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TipoReferencia": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "VelocidadTipo": {
+        "enum": [
+          "Asimetrica",
+          "Simetrica"
+        ],
+        "type": "string"
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppButtonReply": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppChange": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/WhatsAppValue"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppContact": {
+        "type": "object",
+        "properties": {
+          "wa_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "profile": {
+            "$ref": "#/components/schemas/WhatsAppProfile"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppEntry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppChange"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppInteractive": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "button_reply": {
+            "$ref": "#/components/schemas/WhatsAppButtonReply"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppMessage": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "$ref": "#/components/schemas/WhatsAppText"
+          },
+          "interactive": {
+            "$ref": "#/components/schemas/WhatsAppInteractive"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppMetadata": {
+        "type": "object",
+        "properties": {
+          "display_phone_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone_number_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppPayload": {
+        "type": "object",
+        "properties": {
+          "entry": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppEntry"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppProfile": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppText": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WhatsAppValue": {
+        "type": "object",
+        "properties": {
+          "messaging_product": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/WhatsAppMetadata"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppContact"
+            },
+            "nullable": true
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WhatsAppMessage"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header usando Bearer scheme. Ejemplo: \"Bearer {token}\"",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    { }
+  ],
+  "tags": [
+    {
+      "name": "Adicional"
+    },
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Catalogo"
+    },
+    {
+      "name": "Contrato"
+    },
+    {
+      "name": "Empresa"
+    },
+    {
+      "name": "Meta"
+    },
+    {
+      "name": "Nodo"
+    },
+    {
+      "name": "PlanesInternet"
+    },
+    {
+      "name": "Promociones"
+    },
+    {
+      "name": "Prospecto"
+    },
+    {
+      "name": "Proveedor"
+    },
+    {
+      "name": "Tareas"
+    },
+    {
+      "name": "Test"
+    },
+    {
+      "name": "TestDev"
+    },
+    {
+      "name": "Ubicacion"
+    }
+  ]
+}
