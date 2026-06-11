@@ -2225,6 +2225,7 @@
           4
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = AtencionCliente</li><li><code>1</code> = SoporteTecnico</li><li><code>2</code> = Ventas</li><li><code>3</code> = Administracion</li><li><code>4</code> = Sistemas</li></ul>",
         "format": "int32"
       },
       "EmpresaCreateDto": {
@@ -2293,6 +2294,7 @@
           7
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = EnRevision</li><li><code>1</code> = Pendiente</li><li><code>2</code> = PorInstalar</li><li><code>3</code> = Activo</li><li><code>4</code> = Suspendido</li><li><code>5</code> = Anulado</li><li><code>6</code> = Cancelado</li><li><code>7</code> = Terminado</li></ul>",
         "format": "int32"
       },
       "EstadoFasesProspecto": {
@@ -2326,6 +2328,7 @@
           5
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Prospecto</li><li><code>1</code> = Cliente</li><li><code>2</code> = Empleado</li><li><code>3</code> = Externo</li><li><code>4</code> = Retirado</li><li><code>5</code> = Eliminado</li></ul>",
         "format": "int32"
       },
       "EstadoProspecto": {
@@ -2336,6 +2339,7 @@
           3
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Prospecto</li><li><code>1</code> = EnGestion</li><li><code>2</code> = Ganado</li><li><code>3</code> = Perdido</li></ul>",
         "format": "int32"
       },
       "EstadoValidacion": {
@@ -2346,6 +2350,7 @@
           3
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li></ul>",
         "format": "int32"
       },
       "LoginDto": {
@@ -2376,7 +2381,8 @@
           "AmericanExpress",
           "DinersClub"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Visa</li><li><code>1</code> = Mastercard</li><li><code>2</code> = AmericanExpress</li><li><code>3</code> = DinersClub</li></ul>"
       },
       "NodoCreateDto": {
         "type": "object",
@@ -2933,6 +2939,7 @@
           3
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Baja</li><li><code>1</code> = Normal</li><li><code>2</code> = Alta</li><li><code>3</code> = MuyAlta</li></ul>",
         "format": "int32"
       },
       "PromocionDescuentoCrearDto": {
@@ -3252,6 +3259,7 @@
           7
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Temporada</li><li><code>2</code> = Social</li><li><code>3</code> = Retencion</li><li><code>4</code> = PlanCombo</li><li><code>5</code> = Referido</li><li><code>6</code> = DescuentoSocial</li><li><code>7</code> = PromocionTemporal</li></ul>",
         "format": "int32"
       },
       "ProspectoDetalleDto": {
@@ -3673,6 +3681,7 @@
           2
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Nuevos</li><li><code>1</code> = Existentes</li><li><code>2</code> = Ambos</li></ul>",
         "format": "int32"
       },
       "RedesAcceso": {
@@ -3683,7 +3692,8 @@
           "FibraOptica",
           "Inalambrico"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = ParDeCobre</li><li><code>1</code> = Coaxial</li><li><code>2</code> = Otros</li><li><code>3</code> = FibraOptica</li><li><code>4</code> = Inalambrico</li></ul>"
       },
       "TecnologiaEstado": {
         "enum": [
@@ -3692,7 +3702,8 @@
           "Hfc",
           "Ftth"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Otro</li><li><code>1</code> = GponFtth</li><li><code>2</code> = Hfc</li><li><code>3</code> = Ftth</li></ul>"
       },
       "TicketAsuntoEnums": {
         "enum": [
@@ -3706,6 +3717,7 @@
           7
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = SinConexionInternet</li><li><code>2</code> = VelocidadLenta</li><li><code>3</code> = RouterNoEnciende</li><li><code>4</code> = CambioDePlan</li><li><code>5</code> = IntermitenciaSenal</li><li><code>6</code> = ConfiguracionWifi</li><li><code>7</code> = Otro</li></ul>",
         "format": "int32"
       },
       "TicketCreateDto": {
@@ -3805,6 +3817,7 @@
           9
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Nuevo</li><li><code>2</code> = AgendaOperaciones</li><li><code>3</code> = Desistimiento</li><li><code>4</code> = Seguimiento</li><li><code>5</code> = Progreso</li><li><code>6</code> = SoporteNivelDos</li><li><code>7</code> = PendienteRevision</li><li><code>8</code> = Resuelto</li><li><code>9</code> = Cerrado</li></ul>",
         "format": "int32"
       },
       "TicketReportadoEnums": {
@@ -3818,6 +3831,7 @@
           6
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Oficina</li><li><code>2</code> = Campo</li><li><code>3</code> = Telefono</li><li><code>4</code> = Email</li><li><code>5</code> = RedSocial</li><li><code>6</code> = WhatsApp</li></ul>",
         "format": "int32"
       },
       "TicketTipoEnums": {
@@ -3829,6 +3843,7 @@
           4
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = ServicioTecnico</li><li><code>2</code> = NodoCaja</li><li><code>3</code> = TPI</li><li><code>4</code> = ZP4</li></ul>",
         "format": "int32"
       },
       "TipoAdicional": {
@@ -3836,14 +3851,16 @@
           "Fisico",
           "Digital"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Fisico</li><li><code>1</code> = Digital</li></ul>"
       },
       "TipoCuenta": {
         "enum": [
           "Ahorro",
           "Corriente"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ahorro</li><li><code>1</code> = Corriente</li></ul>"
       },
       "TipoCuentas": {
         "enum": [
@@ -3852,7 +3869,8 @@
           "Corporativo",
           "OtrosTipos"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Residencial</li><li><code>1</code> = Cibercafe</li><li><code>2</code> = Corporativo</li><li><code>3</code> = OtrosTipos</li></ul>"
       },
       "TipoIdentificacion": {
         "enum": [
@@ -3861,6 +3879,7 @@
           2
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Cedula</li><li><code>1</code> = Ruc</li><li><code>2</code> = Pasaporte</li></ul>",
         "format": "int32"
       },
       "TipoPersona": {
@@ -3869,6 +3888,7 @@
           1
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Natural</li><li><code>1</code> = Juridica</li></ul>",
         "format": "int32"
       },
       "TipoReferencia": {
@@ -3884,6 +3904,7 @@
           8
         ],
         "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Recomendacion</li><li><code>2</code> = Telefono</li><li><code>3</code> = Oficina</li><li><code>4</code> = VendedorCambaceo</li><li><code>5</code> = RedesSociales</li><li><code>6</code> = PaginaDeInternet</li><li><code>7</code> = Otros</li><li><code>8</code> = Publicidad</li></ul>",
         "format": "int32"
       },
       "VelocidadTipo": {
@@ -3891,7 +3912,8 @@
           "Asimetrica",
           "Simetrica"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Asimetrica</li><li><code>1</code> = Simetrica</li></ul>"
       },
       "WeatherForecast": {
         "type": "object",
