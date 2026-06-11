@@ -1279,6 +1279,18 @@
         }
       }
     },
+    "/api/v1/Tareas/descargar-clientes-wisphub": {
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Test": {
       "get": {
         "tags": [
@@ -1323,6 +1335,37 @@
         "tags": [
           "TestDev"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/crear": {
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketCreateDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1686,6 +1729,18 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "prorrateo": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroRecibo": {
+            "type": "string",
+            "nullable": true
+          },
+          "acuerdoComercial": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1904,6 +1959,22 @@
             "type": "string",
             "nullable": true
           },
+          "numeroContrato": {
+            "type": "string",
+            "nullable": true
+          },
+          "prorrateo": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroRecibo": {
+            "type": "string",
+            "nullable": true
+          },
+          "acuerdoComercial": {
+            "type": "string",
+            "nullable": true
+          },
           "createdAt": {
             "type": "string",
             "nullable": true
@@ -2118,6 +2189,18 @@
             "format": "date-time",
             "nullable": true
           },
+          "prorrateo": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroRecibo": {
+            "type": "string",
+            "nullable": true
+          },
+          "acuerdoComercial": {
+            "type": "string",
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "format": "int32"
@@ -2132,6 +2215,17 @@
           }
         },
         "additionalProperties": false
+      },
+      "DepartamentoTipo": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "EmpresaCreateDto": {
         "type": "object",
@@ -2830,6 +2924,16 @@
           }
         },
         "additionalProperties": false
+      },
+      "PrioridadTipo": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "PromocionDescuentoCrearDto": {
         "type": "object",
@@ -3590,6 +3694,143 @@
         ],
         "type": "string"
       },
+      "TicketAsuntoEnums": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TicketCreateDto": {
+        "required": [
+          "asesorSoporteId",
+          "contactoNombre",
+          "contactoTelefono",
+          "contratoDetalleId",
+          "descripcion",
+          "nodoId",
+          "ticketAsunto",
+          "ticketEstado",
+          "ticketReportadoDesde",
+          "ticketTipo",
+          "tipoDepartamento",
+          "tipoPrioridad"
+        ],
+        "type": "object",
+        "properties": {
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ticketTipo": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "ticketAsunto": {
+            "$ref": "#/components/schemas/TicketAsuntoEnums"
+          },
+          "tipoDepartamento": {
+            "$ref": "#/components/schemas/DepartamentoTipo"
+          },
+          "ticketReportadoDesde": {
+            "$ref": "#/components/schemas/TicketReportadoEnums"
+          },
+          "ticketEstado": {
+            "$ref": "#/components/schemas/TicketEstadoEnums"
+          },
+          "tipoPrioridad": {
+            "$ref": "#/components/schemas/PrioridadTipo"
+          },
+          "asesorSoporteId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "emailAsesorSoporte": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "contactoNombre": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "contactoTelefono": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ticketArchivos": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFinal": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketEstadoEnums": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TicketReportadoEnums": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TicketTipoEnums": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "TipoAdicional": {
         "enum": [
           "Fisico",
@@ -3901,6 +4142,9 @@
     },
     {
       "name": "TestDev"
+    },
+    {
+      "name": "Ticket"
     },
     {
       "name": "Ubicacion"
