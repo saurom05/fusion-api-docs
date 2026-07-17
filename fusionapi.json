@@ -566,32 +566,114 @@
         "tags": [
           "Contrato"
         ],
+        "summary": "Listado de Contratos",
+        "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso \"Lista de Contratos\"**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
+        "parameters": [
+          {
+            "name": "ContratoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PersonaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Dni",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EstadosContrados",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "ServicioTipoIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ContratoResponseDto"
-                  }
-                }
-              },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ContratoResponseDto"
-                  }
+                  "$ref": "#/components/schemas/ContratoResponseDtoPagedResult"
                 }
-              },
-              "text/json": {
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ContratoResponseDto"
-                  }
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -2152,15 +2234,6 @@
             "format": "int32",
             "nullable": true
           },
-          "personaId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "dni": {
-            "type": "string",
-            "nullable": true
-          },
           "registrosPorPagina": {
             "type": "integer",
             "format": "int32",
@@ -2174,6 +2247,15 @@
           "contratoId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
             "nullable": true
           },
           "estadosContrados": {
@@ -2513,6 +2595,36 @@
           "fechaInstalacion": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoResponseDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContratoResponseDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -3432,6 +3544,33 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Baja</li><li><code>1</code> = Normal</li><li><code>2</code> = Alta</li><li><code>3</code> = MuyAlta</li></ul>",
         "format": "int32"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       },
       "PromocionDescuentoCrearDto": {
         "type": "object",
