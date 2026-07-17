@@ -410,6 +410,44 @@
         }
       }
     },
+    "/api/v1/ClientesInternet": {
+      "get": {
+        "tags": [
+          "ClientesInternet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteServicioInternetDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteServicioInternetDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteServicioInternetDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Contrato/crear": {
       "post": {
         "tags": [
@@ -1351,6 +1389,49 @@
         }
       }
     },
+    "/api/v1/Secuencia/crear-secuencia-ip": {
+      "post": {
+        "tags": [
+          "Secuencia"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SecuenciaIpCreate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SecuenciaIpCreate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SecuenciaIpCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Secuencia/test-generar-ip": {
+      "get": {
+        "tags": [
+          "Secuencia"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Tareas/descargar-planes-wisphub": {
       "post": {
         "tags": [
@@ -1368,6 +1449,25 @@
         "tags": [
           "Tareas"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WisphubRequestFilter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WisphubRequestFilter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WisphubRequestFilter"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1380,6 +1480,37 @@
         "tags": [
           "Tareas"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tareas/sincronizar-servicios-wisphub": {
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlTareaWisphubRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlTareaWisphubRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlTareaWisphubRequestDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1744,6 +1875,48 @@
           "cantonId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClienteServicioInternetDto": {
+        "type": "object",
+        "properties": {
+          "idServicio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombresCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "zona": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInstalacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCorte": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroPagos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "router": {
+            "type": "string",
+            "nullable": true
+          },
+          "descuento": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -2356,6 +2529,15 @@
         },
         "additionalProperties": false
       },
+      "ControlTareaWisphubRequestDto": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "$ref": "#/components/schemas/WisphubServicioEstado"
+          }
+        },
+        "additionalProperties": false
+      },
       "DepartamentoTipo": {
         "enum": [
           0,
@@ -2458,6 +2640,16 @@
         },
         "additionalProperties": false
       },
+      "EstadoNodo": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Operativo</li><li><code>1</code> = Operativo</li><li><code>2</code> = EnMantenimiento</li></ul>",
+        "format": "int32"
+      },
       "EstadoPersona": {
         "enum": [
           0,
@@ -2487,10 +2679,11 @@
           0,
           1,
           2,
-          3
+          3,
+          4
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li><li><code>4</code> = Aceptar</li></ul>",
         "format": "int32"
       },
       "LoginDto": {
@@ -2527,7 +2720,15 @@
       "NodoCreateDto": {
         "type": "object",
         "properties": {
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
           "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
             "type": "string",
             "nullable": true
           },
@@ -2554,10 +2755,6 @@
           "ciudadId": {
             "type": "integer",
             "format": "int32"
-          },
-          "estadoNodoId": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2574,6 +2771,14 @@
             "nullable": true
           },
           "publicId": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
             "type": "string",
             "nullable": true
           },
@@ -2597,9 +2802,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "estadoNodoId": {
-            "type": "integer",
-            "format": "int32"
+          "nodoEstado": {
+            "$ref": "#/components/schemas/EstadoNodo"
           },
           "isActive": {
             "type": "boolean"
@@ -3835,6 +4039,24 @@
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = ParDeCobre</li><li><code>1</code> = Coaxial</li><li><code>2</code> = Otros</li><li><code>3</code> = FibraOptica</li><li><code>4</code> = Inalambrico</li></ul>"
       },
+      "SecuenciaIpCreate": {
+        "type": "object",
+        "properties": {
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "segmentoCidr": {
+            "type": "string",
+            "nullable": true
+          },
+          "mascaraSubRed": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TecnologiaEstado": {
         "enum": [
           "Otro",
@@ -4392,6 +4614,27 @@
           }
         },
         "additionalProperties": false
+      },
+      "WisphubRequestFilter": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WisphubServicioEstado": {
+        "enum": [
+          "Ninguno",
+          "Activo",
+          "Suspendido",
+          "Cancelado",
+          "Gratis"
+        ],
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Activo</li><li><code>2</code> = Suspendido</li><li><code>3</code> = Cancelado</li><li><code>4</code> = Gratis</li></ul>"
       }
     },
     "securitySchemes": {
@@ -4416,6 +4659,9 @@
       "name": "Catalogo"
     },
     {
+      "name": "ClientesInternet"
+    },
+    {
       "name": "Contrato"
     },
     {
@@ -4438,6 +4684,9 @@
     },
     {
       "name": "Proveedor"
+    },
+    {
+      "name": "Secuencia"
     },
     {
       "name": "Tareas"
