@@ -453,6 +453,8 @@
         "tags": [
           "Contrato"
         ],
+        "summary": "Crear Contratos en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permiso \"Lista de Contratos\"**.",
         "requestBody": {
           "content": {
             "application/json": {
