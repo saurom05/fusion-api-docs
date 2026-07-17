@@ -597,6 +597,63 @@
         }
       }
     },
+    "/api/v1/Contrato/contratos-by-persona": {
+      "post": {
+        "tags": [
+          "Contrato"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoFilter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoFilter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoFilter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContratoResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Empresa/crear": {
       "post": {
         "tags": [
@@ -1886,6 +1943,30 @@
             "type": "integer",
             "format": "int32"
           },
+          "idPersona": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idContrato": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idServicioInternetDetalle": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipv4Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
           "nombresCliente": {
             "type": "string",
             "nullable": true
@@ -2053,6 +2134,60 @@
           },
           "acuerdoComercial": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoFilter": {
+        "type": "object",
+        "properties": {
+          "filtro": {
+            "$ref": "#/components/schemas/FiltroEstado"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroPagina": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "contratoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "estadosContrados": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "servicioTipoIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },
@@ -2684,6 +2819,16 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li><li><code>4</code> = Aceptar</li></ul>",
+        "format": "int32"
+      },
+      "FiltroEstado": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
         "format": "int32"
       },
       "LoginDto": {
