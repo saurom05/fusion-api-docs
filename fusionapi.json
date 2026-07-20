@@ -481,6 +481,52 @@
         }
       }
     },
+    "/api/v1/Contrato/{id}/renovar": {
+      "post": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Renovar un contrato existente en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permiso \"Lista de Contratos\"**.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del contrato que se va a renovar",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Datos para la nueva vigencia del contrato",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Contrato/{id}": {
       "put": {
         "tags": [
@@ -2862,10 +2908,11 @@
           4,
           5,
           6,
-          7
+          7,
+          8
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = EnRevision</li><li><code>1</code> = Pendiente</li><li><code>2</code> = PorInstalar</li><li><code>3</code> = Activo</li><li><code>4</code> = Suspendido</li><li><code>5</code> = Anulado</li><li><code>6</code> = Cancelado</li><li><code>7</code> = Terminado</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = EnRevision</li><li><code>1</code> = Pendiente</li><li><code>2</code> = PorInstalar</li><li><code>3</code> = Activo</li><li><code>4</code> = Suspendido</li><li><code>5</code> = Anulado</li><li><code>6</code> = Cancelado</li><li><code>7</code> = Terminado</li><li><code>8</code> = Renovado</li></ul>",
         "format": "int32"
       },
       "EstadoFasesProspecto": {
