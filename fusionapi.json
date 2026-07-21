@@ -326,6 +326,18 @@
         }
       }
     },
+    "/api/v1/Catalogo/planificacion/cuadrilla/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/ticket/tipo/combo": {
       "get": {
         "tags": [
@@ -1173,6 +1185,39 @@
         }
       }
     },
+    "/api/v1/Planificacion/crear": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Crear Agenda Tecnica en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaTecnicaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaTecnicaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaTecnicaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Promociones/crear": {
       "post": {
         "tags": [
@@ -1809,6 +1854,36 @@
         }
       }
     },
+    "/api/v1/Ticket/{id}/detalles": {
+      "get": {
+        "tags": [
+          "Ticket"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketsServicioAgendaTecnicaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Ticket/servicios/combo": {
       "get": {
         "tags": [
@@ -2044,6 +2119,35 @@
           },
           "tipo": {
             "$ref": "#/components/schemas/TipoAdicional"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaTecnicaCreateDto": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoCuadrilla": {
+            "$ref": "#/components/schemas/TipoCuadrillaTecnica"
+          },
+          "fechaAgendada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4409,10 +4513,11 @@
           4,
           5,
           6,
-          7
+          7,
+          8
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = SinConexionInternet</li><li><code>2</code> = VelocidadLenta</li><li><code>3</code> = RouterNoEnciende</li><li><code>4</code> = CambioDePlan</li><li><code>5</code> = IntermitenciaSenal</li><li><code>6</code> = ConfiguracionWifi</li><li><code>7</code> = Otro</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = SinConexionInternet</li><li><code>2</code> = VelocidadLenta</li><li><code>3</code> = RouterNoEnciende</li><li><code>4</code> = CambioDePlan</li><li><code>5</code> = IntermitenciaSenal</li><li><code>6</code> = ConfiguracionWifi</li><li><code>7</code> = Otro</li><li><code>8</code> = Instalacion</li></ul>",
         "format": "int32"
       },
       "TicketCreateDto": {
@@ -4672,6 +4777,64 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = ServicioTecnico</li><li><code>2</code> = NodoCaja</li><li><code>3</code> = TPI</li><li><code>4</code> = ZP4</li></ul>",
         "format": "int32"
       },
+      "TicketsServicioAgendaTecnicaDto": {
+        "type": "object",
+        "properties": {
+          "idTicket": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketAsunto": {
+            "$ref": "#/components/schemas/TicketAsuntoEnums"
+          },
+          "ticketAsuntoDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ticketEstado": {
+            "$ref": "#/components/schemas/TicketEstadoEnums"
+          },
+          "ticketEstadoDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoPrioridad": {
+            "$ref": "#/components/schemas/PrioridadTipo"
+          },
+          "tipoPrioridadDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoDescripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TipoAdicional": {
         "enum": [
           "Fisico",
@@ -4679,6 +4842,22 @@
         ],
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Fisico</li><li><code>1</code> = Digital</li></ul>"
+      },
+      "TipoCuadrillaTecnica": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Cuadrilla1</li><li><code>2</code> = Cuadrilla2</li><li><code>3</code> = Cuadrilla3</li><li><code>4</code> = Cuadrilla4</li><li><code>5</code> = Cuadrilla5</li><li><code>6</code> = Cuadrilla6</li><li><code>7</code> = Cuadrilla7</li><li><code>8</code> = Cuadrilla8</li></ul>",
+        "format": "int32"
       },
       "TipoCuenta": {
         "enum": [
@@ -5008,6 +5187,9 @@
     },
     {
       "name": "PlanesInternet"
+    },
+    {
+      "name": "Planificacion"
     },
     {
       "name": "Promociones"
