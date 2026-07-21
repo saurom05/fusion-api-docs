@@ -178,6 +178,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Personas Activas",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK",
@@ -216,6 +218,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Categorias De Proveedor",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "requestBody": {
           "content": {
             "application/json": {
@@ -247,6 +251,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Tipos de Tecnologia",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -259,6 +265,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Tipos de Promocion",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -271,6 +279,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Tipos de Conexion de Internet",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -283,6 +293,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Tipos de Identificacion de Personas",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -295,6 +307,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Tipos de Referencias",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -307,6 +321,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Asesores de Ventas",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -319,6 +335,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Clientes",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -331,6 +349,8 @@
         "tags": [
           "Catalogo"
         ],
+        "summary": "Listado de Cuadrillas",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
         "responses": {
           "200": {
             "description": "OK"
@@ -1876,7 +1896,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TicketsServicioAgendaTecnicaDto"
+                  "$ref": "#/components/schemas/TicketsDetalladoDto"
                 }
               }
             }
@@ -4688,6 +4708,22 @@
         },
         "additionalProperties": false
       },
+      "TicketSolucionTipoEnums": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = FallaEnergia</li><li><code>2</code> = FibraRota</li><li><code>3</code> = ConfiguracionONT</li><li><code>4</code> = RouterDanado</li><li><code>5</code> = ProblemaExternoCorteTerceros</li><li><code>6</code> = ProblemaExternoCaja</li><li><code>7</code> = FalsaAlarma</li><li><code>8</code> = Otras</li></ul>",
+        "format": "int32"
+      },
       "TicketSoporteDto": {
         "type": "object",
         "properties": {
@@ -4777,7 +4813,7 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = ServicioTecnico</li><li><code>2</code> = NodoCaja</li><li><code>3</code> = TPI</li><li><code>4</code> = ZP4</li></ul>",
         "format": "int32"
       },
-      "TicketsServicioAgendaTecnicaDto": {
+      "TicketsDetalladoDto": {
         "type": "object",
         "properties": {
           "idTicket": {
@@ -4788,9 +4824,21 @@
             "type": "integer",
             "format": "int32"
           },
-          "numeroTicket": {
-            "type": "string",
-            "nullable": true
+          "idNodo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idContrato": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idPersona": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idDireccionInstalacion": {
+            "type": "integer",
+            "format": "int32"
           },
           "dni": {
             "type": "string",
@@ -4800,10 +4848,38 @@
             "type": "string",
             "nullable": true
           },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketTipo": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "ticketTipoDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
           "ticketAsunto": {
             "$ref": "#/components/schemas/TicketAsuntoEnums"
           },
           "ticketAsuntoDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoDepartamento": {
+            "$ref": "#/components/schemas/DepartamentoTipo"
+          },
+          "tipoDepartamentoDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ticketReportadoDesde": {
+            "$ref": "#/components/schemas/TicketReportadoEnums"
+          },
+          "ticketReportadoDesdeDescipcion": {
             "type": "string",
             "nullable": true,
             "readOnly": true
@@ -4824,11 +4900,83 @@
             "nullable": true,
             "readOnly": true
           },
-          "nodoId": {
-            "type": "integer",
-            "format": "int32"
+          "solucionTipo": {
+            "$ref": "#/components/schemas/TicketSolucionTipoEnums"
+          },
+          "solucionTipoDescipcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           },
           "nodoDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaFinal": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "asesorSoporteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAsesorSoporte": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactoTelefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "abiertoPor": {
+            "type": "string",
+            "nullable": true
+          },
+          "provincia": {
+            "type": "string",
+            "nullable": true
+          },
+          "canton": {
+            "type": "string",
+            "nullable": true
+          },
+          "parroquia": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudad": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "coordenada": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
             "type": "string",
             "nullable": true
           }
