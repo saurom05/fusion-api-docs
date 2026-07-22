@@ -1291,17 +1291,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
+                "$ref": "#/components/schemas/AsignacionTecnicaCreateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
+                "$ref": "#/components/schemas/AsignacionTecnicaCreateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
+                "$ref": "#/components/schemas/AsignacionTecnicaCreateDto"
               }
             }
           }
@@ -2353,74 +2353,6 @@
         },
         "additionalProperties": false
       },
-      "AgendaTecnicaUpdateDto": {
-        "type": "object",
-        "properties": {
-          "ticketId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "contratoDetalleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "empresaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "tipoCuadrilla": {
-            "$ref": "#/components/schemas/TipoCuadrillaTecnica"
-          },
-          "fechaAgendada": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "observacion": {
-            "type": "string",
-            "nullable": true
-          },
-          "esReagendada": {
-            "type": "boolean"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fechaCierreAgenda": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "motivoReagendamiento": {
-            "type": "string",
-            "nullable": true
-          },
-          "agendaTecnicaEstado": {
-            "$ref": "#/components/schemas/EstadoAgendaTecnica"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "tecnicoResponsableId": {
-            "type": "string",
-            "nullable": true
-          },
-          "transporteAsignadoId": {
-            "$ref": "#/components/schemas/VehiculoEmpresaEnum"
-          },
-          "tabletAsignadoId": {
-            "$ref": "#/components/schemas/TabletsEmpresaEnum"
-          },
-          "coordenadaSnapshot": {
-            "type": "string",
-            "nullable": true
-          },
-          "asignacionTecnica": {
-            "$ref": "#/components/schemas/AsignacionTecnicaCreateDto"
-          }
-        },
-        "additionalProperties": false
-      },
       "AsignacionTecnicaCreateDto": {
         "required": [
           "tecnicosIds"
@@ -2441,6 +2373,16 @@
             "items": {
               "type": "string"
             }
+          },
+          "transporteAsignadoId": {
+            "$ref": "#/components/schemas/VehiculoEmpresaEnum"
+          },
+          "tabletAsignadoId": {
+            "$ref": "#/components/schemas/TabletsEmpresaEnum"
+          },
+          "coordenadaSnapshot": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3295,19 +3237,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "EstadoAgendaTecnica": {
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = Agendada</li><li><code>2</code> = ReAgendada</li><li><code>3</code> = Completada</li><li><code>4</code> = Aprobada</li><li><code>5</code> = Cancelada</li></ul>",
-        "format": "int32"
       },
       "EstadoContrato": {
         "enum": [
@@ -5452,6 +5381,16 @@
           },
           "telefono": {
             "type": "string",
+            "nullable": true
+          },
+          "idAgendaTecnica": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idAsignacionTecnica": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
