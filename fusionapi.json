@@ -372,6 +372,34 @@
         }
       }
     },
+    "/api/v1/Catalogo/planificacion/tablets/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Tablets",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/planificacion/transporte/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Tablets",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/ticket/tipo/combo": {
       "get": {
         "tags": [
@@ -1219,7 +1247,7 @@
         }
       }
     },
-    "/api/v1/Planificacion/agenda/crear": {
+    "/api/v1/Planificacion/agenda": {
       "post": {
         "tags": [
           "Planificacion"
@@ -1274,6 +1302,39 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/ficha-tecnica": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "LLenar Ficha Tecnica en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaCreateDto"
               }
             }
           }
@@ -3245,7 +3306,7 @@
           5
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = Agendada</li><li><code>2</code> = ReAgendada</li><li><code>3</code> = EnProceso</li><li><code>4</code> = Completada</li><li><code>5</code> = Cancelada</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = Agendada</li><li><code>2</code> = ReAgendada</li><li><code>3</code> = Completada</li><li><code>4</code> = Aprobada</li><li><code>5</code> = Cancelada</li></ul>",
         "format": "int32"
       },
       "EstadoContrato": {
@@ -3331,6 +3392,113 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li><li><code>4</code> = Aceptar</li></ul>",
         "format": "int32"
       },
+      "FichaTecnicaCreateDto": {
+        "type": "object",
+        "properties": {
+          "asignacionTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFinal": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tipoFalla": {
+            "$ref": "#/components/schemas/TicketSolucionTipoEnums"
+          },
+          "nuevaFalla": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivoDeFalla": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipoRevisado": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieEquipoRevisado": {
+            "type": "string",
+            "nullable": true
+          },
+          "signalDbmAnterior": {
+            "type": "number",
+            "format": "double"
+          },
+          "signalDbmDespues": {
+            "type": "number",
+            "format": "double"
+          },
+          "solucionAplicada": {
+            "type": "string",
+            "nullable": true
+          },
+          "esRequiereSeguimiento": {
+            "type": "boolean"
+          },
+          "observacionesSeguimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacionesGenerales": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotosTrabajo": {
+            "type": "string",
+            "nullable": true
+          },
+          "archivoAdicional": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecaObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecaSupervisorObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "indicadorTeca": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firmaTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmaCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "esTrabajoFinalizado": {
+            "type": "boolean"
+          },
+          "materiales": {
+            "$ref": "#/components/schemas/MaterialesFichaTecnicaDto"
+          },
+          "agendaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "FiltroEstado": {
         "enum": [
           0,
@@ -3371,6 +3539,28 @@
         ],
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Visa</li><li><code>1</code> = Mastercard</li><li><code>2</code> = AmericanExpress</li><li><code>3</code> = DinersClub</li></ul>"
+      },
+      "MaterialesFichaTecnicaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
       },
       "NodoCreateDto": {
         "type": "object",
