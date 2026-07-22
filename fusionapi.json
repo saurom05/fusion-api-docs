@@ -330,6 +330,20 @@
         }
       }
     },
+    "/api/v1/Catalogo/persona/tecnico/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Tecnicos",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/persona/clientes/combo": {
       "get": {
         "tags": [
@@ -1205,7 +1219,7 @@
         }
       }
     },
-    "/api/v1/Planificacion/crear": {
+    "/api/v1/Planificacion/agenda/crear": {
       "post": {
         "tags": [
           "Planificacion"
@@ -1227,6 +1241,39 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/AgendaTecnicaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/agenda/asignar-tecnico": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Asignar Tecnicos en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaTecnicaUpdateDto"
               }
             }
           }
@@ -1857,16 +1904,86 @@
         "tags": [
           "Ticket"
         ],
+        "summary": "Listado de Tickets",
+        "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
+        "parameters": [
+          {
+            "name": "TicketId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "EstadosIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "ArrTicketIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "TerminoBusqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TicketSoporteDto"
-                  }
+                  "$ref": "#/components/schemas/TicketSoporteDtoPagedResult"
                 }
               }
             }
@@ -2168,6 +2285,101 @@
           "observacion": {
             "type": "string",
             "nullable": true
+          },
+          "esReagendada": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaTecnicaUpdateDto": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoCuadrilla": {
+            "$ref": "#/components/schemas/TipoCuadrillaTecnica"
+          },
+          "fechaAgendada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "esReagendada": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaCierreAgenda": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "motivoReagendamiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "agendaTecnicaEstado": {
+            "$ref": "#/components/schemas/EstadoAgendaTecnica"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "tecnicoResponsableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "transporteAsignadoId": {
+            "$ref": "#/components/schemas/VehiculoEmpresaEnum"
+          },
+          "tabletAsignadoId": {
+            "$ref": "#/components/schemas/TabletsEmpresaEnum"
+          },
+          "coordenadaSnapshot": {
+            "type": "string",
+            "nullable": true
+          },
+          "asignacionTecnica": {
+            "$ref": "#/components/schemas/AsignacionTecnicaCreateDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsignacionTecnicaCreateDto": {
+        "required": [
+          "tecnicosIds"
+        ],
+        "type": "object",
+        "properties": {
+          "fechaAsignacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agendaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tecnicosIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "additionalProperties": false
@@ -3022,6 +3234,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "EstadoAgendaTecnica": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = Agendada</li><li><code>2</code> = ReAgendada</li><li><code>3</code> = EnProceso</li><li><code>4</code> = Completada</li><li><code>5</code> = Cancelada</li></ul>",
+        "format": "int32"
       },
       "EstadoContrato": {
         "enum": [
@@ -4514,6 +4739,20 @@
         },
         "additionalProperties": false
       },
+      "TabletsEmpresaEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Tabl001</li><li><code>2</code> = Tabl002</li><li><code>3</code> = Tabl003</li><li><code>4</code> = Tabl004</li><li><code>5</code> = Tabl005</li><li><code>6</code> = Tabl006</li></ul>",
+        "format": "int32"
+      },
       "TecnologiaEstado": {
         "enum": [
           "Otro",
@@ -4634,10 +4873,15 @@
           6,
           7,
           8,
-          9
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Nuevo</li><li><code>2</code> = AgendaOperaciones</li><li><code>3</code> = Desistimiento</li><li><code>4</code> = Seguimiento</li><li><code>5</code> = Progreso</li><li><code>6</code> = SoporteNivelDos</li><li><code>7</code> = PendienteRevision</li><li><code>8</code> = Resuelto</li><li><code>9</code> = Cerrado</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Nuevo</li><li><code>2</code> = SoporteNivelUno</li><li><code>3</code> = SoporteNivelDos</li><li><code>4</code> = AgendaOperaciones</li><li><code>5</code> = Planificacion</li><li><code>6</code> = TecnicoAsignados</li><li><code>7</code> = TecnicoEnCampo</li><li><code>8</code> = Reagendacion</li><li><code>9</code> = Desistimiento</li><li><code>10</code> = Seguimiento</li><li><code>11</code> = PendienteRevision</li><li><code>12</code> = RetiroDeEquipo</li><li><code>13</code> = Resuelto</li><li><code>14</code> = Cerrado</li></ul>",
         "format": "int32"
       },
       "TicketReportadoEnums": {
@@ -4797,6 +5041,46 @@
           "duracionTicket": {
             "type": "string",
             "nullable": true
+          },
+          "idAgendaTecnica": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idAsignacionTecnica": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketSoporteDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketSoporteDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -5070,6 +5354,20 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Internet</li><li><code>2</code> = Television</li><li><code>3</code> = Seguridad</li><li><code>4</code> = Rastreo</li></ul>",
+        "format": "int32"
+      },
+      "VehiculoEmpresaEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Vehi001</li><li><code>2</code> = Vehi002</li><li><code>3</code> = Vehi003</li><li><code>4</code> = Vehi004</li><li><code>5</code> = Vehi005</li><li><code>6</code> = Vehi006</li></ul>",
         "format": "int32"
       },
       "VelocidadTipo": {
