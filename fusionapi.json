@@ -1415,6 +1415,96 @@
         }
       }
     },
+    "/api/v1/Planificacion": {
+      "get": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Listado de Ficha Tecnicas",
+        "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
+        "parameters": [
+          {
+            "name": "AgendaTecnicaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TickedId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FichaTecnicaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "EstadosAgendaTecnica",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FichaTecnicaOperacionesDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Promociones/crear": {
       "post": {
         "tags": [
@@ -3489,6 +3579,74 @@
           "ticketId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaTecnicaOperacionesDto": {
+        "type": "object",
+        "properties": {
+          "fichaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agendaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaFicha": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaAgenda": {
+            "type": "string",
+            "nullable": true
+          },
+          "prioridad": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaTecnicaOperacionesDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FichaTecnicaOperacionesDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false
