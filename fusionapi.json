@@ -1371,6 +1371,50 @@
         }
       }
     },
+    "/api/v1/Planificacion/agenda/tecnico-campo/{id}/activar": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Activar Tecnicos en Campo",
+        "description": "Para indicar que el tecnico esta en el sitio listo para revisar la tarea asignada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TecnicoCampoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TecnicoCampoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TecnicoCampoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Promociones/crear": {
       "post": {
         "tags": [
@@ -3349,10 +3393,6 @@
       "FichaTecnicaCreateDto": {
         "type": "object",
         "properties": {
-          "asignacionTecnicaId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "actividadTecaId": {
             "type": "integer",
             "format": "int32"
@@ -4896,6 +4936,20 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Tabl001</li><li><code>2</code> = Tabl002</li><li><code>3</code> = Tabl003</li><li><code>4</code> = Tabl004</li><li><code>5</code> = Tabl005</li><li><code>6</code> = Tabl006</li></ul>",
         "format": "int32"
+      },
+      "TecnicoCampoDto": {
+        "type": "object",
+        "properties": {
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
       },
       "TecnologiaEstado": {
         "enum": [
