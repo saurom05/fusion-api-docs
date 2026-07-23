@@ -1415,7 +1415,7 @@
         }
       }
     },
-    "/api/v1/Planificacion": {
+    "/api/v1/Planificacion/agenda/ficha-tecnica": {
       "get": {
         "tags": [
           "Planificacion"
