@@ -400,6 +400,31 @@
         }
       }
     },
+    "/api/v1/Catalogo/tecas/{id}/actividades": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Actividades de Tecas",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/ticket/tipo/combo": {
       "get": {
         "tags": [
@@ -5447,10 +5472,11 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = ServicioTecnico</li><li><code>2</code> = NodoCaja</li><li><code>3</code> = TPI</li><li><code>4</code> = ZP4</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = ServicioTecnico</li><li><code>2</code> = NodoCaja</li><li><code>3</code> = TPI</li><li><code>4</code> = ZP4</li><li><code>5</code> = Administrativo</li></ul>",
         "format": "int32"
       },
       "TicketsDetalladoDto": {
