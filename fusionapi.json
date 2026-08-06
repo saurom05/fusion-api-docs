@@ -2690,6 +2690,14 @@
             "type": "string",
             "nullable": true
           },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
           "nombresCliente": {
             "type": "string",
             "nullable": true
