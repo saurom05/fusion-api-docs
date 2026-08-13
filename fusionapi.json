@@ -173,6 +173,46 @@
         }
       }
     },
+    "/api/v1/Catalogo/producto/seed/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Materiales de Bodega",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoResumenDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoResumenDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoResumenDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/persona/estado-persona/combo": {
       "get": {
         "tags": [
@@ -323,6 +363,30 @@
         ],
         "summary": "Listado de Asesores de Ventas",
         "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/persona/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de personas/usuarios para uso en controles de selección (Combobox).",
+        "description": "Consulta la información para ser usadas en Combobox(UI)",
+        "parameters": [
+          {
+            "name": "rol",
+            "in": "query",
+            "description": "Nombre o identificador del rol para filtrar (opcional).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -4456,6 +4520,24 @@
           }
         },
         "additionalProperties": { }
+      },
+      "ProductoResumenDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "PromocionDescuentoCrearDto": {
         "type": "object",
