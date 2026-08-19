@@ -5932,6 +5932,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "otroAsunto": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6347,6 +6351,10 @@
           "idAsignacionTecnica": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "otroAsunto": {
+            "type": "string",
             "nullable": true
           }
         },
