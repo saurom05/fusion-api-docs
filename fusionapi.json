@@ -1717,6 +1717,17 @@
             }
           },
           {
+            "name": "ArrFichaTecnicaIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
             "name": "EstadosAgendaTecnica",
             "in": "query",
             "schema": {
@@ -1879,7 +1890,7 @@
         "tags": [
           "Planificacion"
         ],
-        "summary": "Listado de Ficha Tecnicas",
+        "summary": "Buscar Agenda Por Tecnicos",
         "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
         "parameters": [
           {
@@ -1970,6 +1981,38 @@
                   "items": {
                     "$ref": "#/components/schemas/FichaTecnicaOperacionesDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/ficha-tecnica/{id}": {
+      "get": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Buscar Ficha por Id",
+        "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FichaTecnicaOperacionesDetallesDto"
                 }
               }
             }
@@ -3058,6 +3101,35 @@
         },
         "additionalProperties": false
       },
+      "AgendaTecnicaSoporteDto": {
+        "type": "object",
+        "properties": {
+          "agendaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaAgendada": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCierreAgenda": {
+            "type": "string",
+            "nullable": true
+          },
+          "esReagendada": {
+            "type": "boolean"
+          },
+          "agendaTecnicaEstado": {
+            "$ref": "#/components/schemas/EstadoAgendaTecnica"
+          },
+          "agendaTecnicaEstadoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AsignacionTecnicaCreateDto": {
         "required": [
           "tecnicosIds"
@@ -3087,6 +3159,19 @@
           },
           "coordenadaSnapshot": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsignacionTecnicaOperacionesDto": {
+        "type": "object",
+        "properties": {
+          "tecnicosAsignados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatosTenicoResumenDto"
+            },
             "nullable": true
           }
         },
@@ -4003,6 +4088,27 @@
         },
         "additionalProperties": false
       },
+      "DatosTenicoResumenDto": {
+        "type": "object",
+        "properties": {
+          "asignacionTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tecnicoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombresTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "esResponsable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "DepartamentoTipo": {
         "enum": [
           0,
@@ -4069,6 +4175,20 @@
         },
         "additionalProperties": false
       },
+      "EstadoAgendaTecnica": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = Agendada</li><li><code>2</code> = ReAgendada</li><li><code>3</code> = Completada</li><li><code>4</code> = Aprobada</li><li><code>5</code> = Cancelada</li><li><code>6</code> = EnSitio</li></ul>",
+        "format": "int32"
+      },
       "EstadoContrato": {
         "enum": [
           0,
@@ -4105,6 +4225,18 @@
           }
         },
         "additionalProperties": false
+      },
+      "EstadoFichaTecnicaEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = ReAgendada</li><li><code>2</code> = Completada</li><li><code>3</code> = Aprobada</li><li><code>4</code> = Cancelada</li></ul>",
+        "format": "int32"
       },
       "EstadoNodo": {
         "enum": [
@@ -4255,14 +4387,10 @@
         },
         "additionalProperties": false
       },
-      "FichaTecnicaOperacionesDto": {
+      "FichaTecnicaOperacionesDetallesDto": {
         "type": "object",
         "properties": {
-          "fichaTecnicaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ticketId": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -4270,25 +4398,194 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombres": {
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "mes": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "dia": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "fechaFinal": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tipoFalla": {
+            "$ref": "#/components/schemas/TicketSolucionTipoEnums"
+          },
+          "nuevaFalla": {
             "type": "string",
             "nullable": true
           },
-          "tecnico": {
+          "motivoDeFalla": {
             "type": "string",
             "nullable": true
           },
-          "fechaFicha": {
+          "equipoRevisado": {
             "type": "string",
             "nullable": true
           },
-          "fechaAgenda": {
+          "serieEquipoRevisado": {
             "type": "string",
             "nullable": true
           },
-          "prioridad": {
+          "signalDbmAnterior": {
+            "type": "number",
+            "format": "double"
+          },
+          "signalDbmDespues": {
+            "type": "number",
+            "format": "double"
+          },
+          "solucionAplicada": {
             "type": "string",
             "nullable": true
+          },
+          "esRequiereSeguimiento": {
+            "type": "boolean"
+          },
+          "observacionesSeguimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacionesGenerales": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialesUsados": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotosTrabajo": {
+            "type": "string",
+            "nullable": true
+          },
+          "archivoAdicional": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecaObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecaSupervisorObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "indicadorTeca": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firmaTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmaCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "esTrabajoFinalizado": {
+            "type": "boolean"
+          },
+          "estadoFichaTecnica": {
+            "$ref": "#/components/schemas/EstadoFichaTecnicaEnum"
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "datosTicket": {
+            "$ref": "#/components/schemas/TicketOperacionesDto"
+          },
+          "datosPersona": {
+            "$ref": "#/components/schemas/PersonaOperacionesDto"
+          },
+          "datosDireccionServicio": {
+            "$ref": "#/components/schemas/PersonaDireccionOperacionesDto"
+          },
+          "datosAgendaTecnica": {
+            "$ref": "#/components/schemas/AgendaTecnicaSoporteDto"
+          },
+          "datosAsignacionTecnica": {
+            "$ref": "#/components/schemas/AsignacionTecnicaOperacionesDto"
+          },
+          "estadoFichaTecnicaDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoFallaDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaTecnicaOperacionesDto": {
+        "type": "object",
+        "properties": {
+          "fichaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datosTicket": {
+            "$ref": "#/components/schemas/TicketOperacionesDto"
+          },
+          "datosPersona": {
+            "$ref": "#/components/schemas/PersonaOperacionesDto"
+          },
+          "datosDireccionServicio": {
+            "$ref": "#/components/schemas/PersonaDireccionOperacionesDto"
+          },
+          "datosAgendaTecnica": {
+            "$ref": "#/components/schemas/AgendaTecnicaSoporteDto"
+          },
+          "datosAsignacionTecnica": {
+            "$ref": "#/components/schemas/AsignacionTecnicaOperacionesDto"
+          },
+          "fechaFichaInicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "estadoFichaTecnica": {
+            "$ref": "#/components/schemas/EstadoFichaTecnicaEnum"
+          },
+          "estadoFichaTecnicaDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -4518,6 +4815,68 @@
         },
         "additionalProperties": false
       },
+      "PersonaDireccionOperacionesDto": {
+        "type": "object",
+        "properties": {
+          "personaDireccionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "provinciaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "provinciaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantonDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadDescripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PersonaEstadoCreateDto": {
         "type": "object",
         "properties": {
@@ -4546,6 +4905,40 @@
           "descripcion": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonaOperacionesDto": {
+        "type": "object",
+        "properties": {
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "personaEstado": {
+            "$ref": "#/components/schemas/EstadoPersona"
+          },
+          "personaEstadoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -5962,6 +6355,84 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Nuevo</li><li><code>2</code> = SoporteNivelUno</li><li><code>3</code> = SoporteNivelDos</li><li><code>4</code> = AgendaOperaciones</li><li><code>5</code> = Planificacion</li><li><code>6</code> = TecnicoEnRuta</li><li><code>7</code> = TecnicoEnSitio</li><li><code>8</code> = Reagendacion</li><li><code>9</code> = Desistimiento</li><li><code>10</code> = Seguimiento</li><li><code>11</code> = PendienteRevision</li><li><code>12</code> = RetiroDeEquipo</li><li><code>13</code> = Resuelto</li><li><code>14</code> = Cerrado</li></ul>",
         "format": "int32"
       },
+      "TicketOperacionesDto": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "asesorSoporteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactoTelefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketTipo": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "ticketTipoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ticketAsunto": {
+            "$ref": "#/components/schemas/TicketAsuntoEnums"
+          },
+          "ticketAsuntoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoDepartamento": {
+            "$ref": "#/components/schemas/DepartamentoTipo"
+          },
+          "tipoDepartamentoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ticketReportadoDesde": {
+            "$ref": "#/components/schemas/TicketReportadoEnums"
+          },
+          "ticketReportadoDesdeDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ticketEstado": {
+            "$ref": "#/components/schemas/TicketEstadoEnums"
+          },
+          "ticketEstadoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tipoPrioridad": {
+            "$ref": "#/components/schemas/PrioridadTipo"
+          },
+          "tipoPrioridadDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TicketReportadoEnums": {
         "enum": [
           0,
@@ -6049,7 +6520,7 @@
       "TicketSoporteDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "ticketId": {
             "type": "integer",
             "format": "int32"
           },
@@ -6061,9 +6532,17 @@
             "type": "integer",
             "format": "int32"
           },
-          "nodoId": {
-            "type": "integer",
-            "format": "int32"
+          "datosPersona": {
+            "$ref": "#/components/schemas/PersonaOperacionesDto"
+          },
+          "datosDireccionServicio": {
+            "$ref": "#/components/schemas/PersonaDireccionOperacionesDto"
+          },
+          "datosAgendaTecnica": {
+            "$ref": "#/components/schemas/AgendaTecnicaSoporteDto"
+          },
+          "datosAsignacionTecnica": {
+            "$ref": "#/components/schemas/AsignacionTecnicaOperacionesDto"
           },
           "fechaInicio": {
             "type": "string",
@@ -6072,9 +6551,6 @@
           "fechaFinal": {
             "type": "string",
             "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
           },
           "asesorSoporteId": {
             "type": "string",
@@ -6108,10 +6584,6 @@
             "nullable": true,
             "readOnly": true
           },
-          "clienteServicio": {
-            "type": "string",
-            "nullable": true
-          },
           "ipClienteServicio": {
             "type": "string",
             "nullable": true
@@ -6120,15 +6592,8 @@
             "type": "string",
             "nullable": true
           },
-          "idAgendaTecnica": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "idAsignacionTecnica": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
