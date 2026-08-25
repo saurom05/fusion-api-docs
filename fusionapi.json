@@ -588,6 +588,34 @@
         }
       }
     },
+    "/api/v1/Catalogo/ficha/motivo-pagos/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Motivos de Pago en una Ficha Tecnica",
+        "description": "Consulta la información para ser usadas en Combobox(UI).",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/ficha/motivo-reagenda/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Listado de Motivos de Reagenda en una Ficha Tecnica",
+        "description": "Consulta la información para ser usadas en Combobox(UI).",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Clientes": {
       "get": {
         "tags": [
@@ -2016,6 +2044,39 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/agenda/ficha-tecnica/cerrar": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Cierra Agenda por Operaciones",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaOperacionesCerrarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaOperacionesCerrarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaOperacionesCerrarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -4019,6 +4080,19 @@
         },
         "additionalProperties": false
       },
+      "ContratoSoporteDto": {
+        "type": "object",
+        "properties": {
+          "planIdSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "redAcceso": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          }
+        },
+        "additionalProperties": false
+      },
       "ContratoUpdateDto": {
         "type": "object",
         "properties": {
@@ -4376,7 +4450,11 @@
       "FichaTecnicaCreateDto": {
         "type": "object",
         "properties": {
-          "actividadTecaId": {
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agendaTecnicaId": {
             "type": "integer",
             "format": "int32"
           },
@@ -4427,17 +4505,19 @@
             "type": "string",
             "nullable": true
           },
-          "observacionesGenerales": {
-            "type": "string",
+          "materiales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaterialesFichaTecnicaDto"
+            },
             "nullable": true
           },
-          "fotosTrabajo": {
-            "type": "string",
-            "nullable": true
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "archivoAdicional": {
-            "type": "string",
-            "nullable": true
+          "tipoActividad": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
           },
           "tecaObservacion": {
             "type": "string",
@@ -4451,6 +4531,28 @@
             "type": "integer",
             "format": "int32"
           },
+          "puntajeActividadTeca": {
+            "type": "number",
+            "format": "double"
+          },
+          "observacionesGenerales": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotosTrabajo": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "archivoAdicional": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
           "firmaTecnico": {
             "type": "string",
             "nullable": true
@@ -4462,20 +4564,121 @@
           "esTrabajoFinalizado": {
             "type": "boolean"
           },
-          "materiales": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MaterialesFichaTecnicaDto"
-            },
+          "esRevisadoPorBodega": {
+            "type": "boolean"
+          },
+          "esReagenda": {
+            "type": "boolean"
+          },
+          "motivosReagenda": {
+            "type": "string",
             "nullable": true
           },
-          "agendaTecnicaId": {
+          "esCoordenadaEditar": {
+            "type": "boolean"
+          },
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "esPagoCliente": {
+            "type": "boolean"
+          },
+          "montoPago": {
+            "type": "number",
+            "format": "double"
+          },
+          "reciboPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivosPago": {
+            "$ref": "#/components/schemas/MotivosPagoFichaEnum"
+          },
+          "comentarioPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "pruebasVelocidadDescarga": {
+            "type": "number",
+            "format": "double"
+          },
+          "pruebasVelocidadSubida": {
+            "type": "number",
+            "format": "double"
+          },
+          "pruebasPing": {
             "type": "integer",
             "format": "int32"
           },
-          "ticketId": {
+          "tipoConexion": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          },
+          "routerOnuAsignado": {
+            "type": "string",
+            "nullable": true
+          },
+          "planIdSnapshot": {
             "type": "integer",
             "format": "int32"
+          },
+          "numeroSerieEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddressEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAsignadaEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metrosCableUsado": {
+            "type": "number",
+            "format": "double"
+          },
+          "ubicacionEquipo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaTecnicaOperacionesCerrarDto": {
+        "type": "object",
+        "properties": {
+          "fichaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "esCambioActividadTeca": {
+            "type": "boolean"
+          },
+          "esReagendamiento": {
+            "type": "boolean"
+          },
+          "esBodegaEnviar": {
+            "type": "boolean"
+          },
+          "tipoActividad": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tecaSupervisorObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "indicadorTeca": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "observacionesGenerales": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4488,10 +4691,6 @@
             "format": "int32"
           },
           "agendaTecnicaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "actividadTecaId": {
             "type": "integer",
             "format": "int32"
           },
@@ -4519,6 +4718,16 @@
             "format": "date-time",
             "nullable": true
           },
+          "fechaCierreOperaciones": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCierreBodega": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "tipoFalla": {
             "$ref": "#/components/schemas/TicketSolucionTipoEnums"
           },
@@ -4557,21 +4766,13 @@
             "type": "string",
             "nullable": true
           },
-          "observacionesGenerales": {
-            "type": "string",
-            "nullable": true
-          },
           "materialesUsados": {
             "type": "string",
             "nullable": true
           },
-          "fotosTrabajo": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoAdicional": {
-            "type": "string",
-            "nullable": true
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32"
           },
           "tecaObservacion": {
             "type": "string",
@@ -4585,6 +4786,24 @@
             "type": "integer",
             "format": "int32"
           },
+          "observacionesGenerales": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotosTrabajo": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "archivoAdicional": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
           "firmaTecnico": {
             "type": "string",
             "nullable": true
@@ -4593,11 +4812,82 @@
             "type": "string",
             "nullable": true
           },
+          "esRevisadoPorBodega": {
+            "type": "boolean"
+          },
           "esTrabajoFinalizado": {
             "type": "boolean"
           },
           "estadoFichaTecnica": {
             "$ref": "#/components/schemas/EstadoFichaTecnicaEnum"
+          },
+          "esReagenda": {
+            "type": "boolean"
+          },
+          "motivosReagenda": {
+            "type": "string",
+            "nullable": true
+          },
+          "esPagoCliente": {
+            "type": "boolean"
+          },
+          "montoPago": {
+            "type": "number",
+            "format": "double"
+          },
+          "reciboPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivosPago": {
+            "$ref": "#/components/schemas/MotivosPagoFichaEnum"
+          },
+          "comentarioPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "pruebasVelocidadDescarga": {
+            "type": "number",
+            "format": "double"
+          },
+          "pruebasVelocidadSubida": {
+            "type": "number",
+            "format": "double"
+          },
+          "pruebasPing": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoConexion": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          },
+          "routerOnuAsignado": {
+            "type": "string",
+            "nullable": true
+          },
+          "planIdSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroSerieEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddressEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAsignadaEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metrosCableUsado": {
+            "type": "number",
+            "format": "double"
+          },
+          "ubicacionEquipo": {
+            "type": "string",
+            "nullable": true
           },
           "createdAt": {
             "type": "string",
@@ -4789,6 +5079,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "MotivosPagoFichaEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = PagoInstalacion</li><li><code>2</code> = PagoMesCurso</li><li><code>3</code> = PagoMesAdelanto</li><li><code>4</code> = PagoProrrateo</li><li><code>5</code> = OtroPago</li></ul>",
+        "format": "int32"
       },
       "NodoCreateDto": {
         "type": "object",
@@ -6319,6 +6622,10 @@
           "interfazLan": {
             "type": "string",
             "nullable": true
+          },
+          "routerOnuDescripcion": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6629,6 +6936,59 @@
         },
         "additionalProperties": false
       },
+      "TicketSeguimientoSoporteDto": {
+        "type": "object",
+        "properties": {
+          "ticketSeguimientoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solucionTipo": {
+            "$ref": "#/components/schemas/TicketSolucionTipoEnums"
+          },
+          "solucionTipoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "asesorSoporteSeguimientoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "asesorSoporteSeguimientoNombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketArchivosSeguimiento": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "detallesSeguimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TicketServiciosClientesDto": {
         "type": "object",
         "properties": {
@@ -6834,6 +7194,16 @@
           },
           "datosServicioInternetDetallado": {
             "$ref": "#/components/schemas/ServicioInternetDetalleSoporteDto"
+          },
+          "ticketsRespuestasAgregadas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketSeguimientoSoporteDto"
+            },
+            "nullable": true
+          },
+          "datosContratoServicio": {
+            "$ref": "#/components/schemas/ContratoSoporteDto"
           },
           "asesorSoporteNombre": {
             "type": "string",
