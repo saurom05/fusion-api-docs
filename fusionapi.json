@@ -2738,6 +2738,37 @@
         }
       }
     },
+    "/api/v1/TestDev/upload": {
+      "post": {
+        "tags": [
+          "TestDev"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestDavWebDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestDavWebDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TestDavWebDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Ticket/crear": {
       "post": {
         "tags": [
@@ -3662,6 +3693,18 @@
           "acuerdoComercial": {
             "type": "string",
             "nullable": true
+          },
+          "esEditarInformacion": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4224,6 +4267,18 @@
             "nullable": true
           },
           "acuerdoComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "esEditarInformacion": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
             "type": "string",
             "nullable": true
           },
@@ -6638,10 +6693,14 @@
           3,
           4,
           5,
-          6
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Tabl001</li><li><code>2</code> = Tabl002</li><li><code>3</code> = Tabl003</li><li><code>4</code> = Tabl004</li><li><code>5</code> = Tabl005</li><li><code>6</code> = Tabl006</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Tabl001</li><li><code>2</code> = Tabl002</li><li><code>3</code> = Tabl003</li><li><code>4</code> = Tabl004</li><li><code>5</code> = Tabl005</li><li><code>6</code> = Tabl006</li><li><code>7</code> = Tabl007</li><li><code>8</code> = Tabl008</li><li><code>9</code> = Tabl009</li><li><code>10</code> = Tabl010</li></ul>",
         "format": "int32"
       },
       "TecnicoCampoDto": {
@@ -6667,6 +6726,28 @@
         ],
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Otro</li><li><code>1</code> = GponFtth</li><li><code>2</code> = Hfc</li><li><code>3</code> = Ftth</li></ul>"
+      },
+      "TestDavWebDto": {
+        "type": "object",
+        "properties": {
+          "base64Data": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "TicketAsuntoEnums": {
         "enum": [
@@ -7485,10 +7566,12 @@
           5,
           6,
           7,
-          8
+          8,
+          9,
+          10
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Cuadrilla1</li><li><code>2</code> = Cuadrilla2</li><li><code>3</code> = Cuadrilla3</li><li><code>4</code> = Cuadrilla4</li><li><code>5</code> = Cuadrilla5</li><li><code>6</code> = Cuadrilla6</li><li><code>7</code> = Cuadrilla7</li><li><code>8</code> = Cuadrilla8</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Cuadrilla1</li><li><code>2</code> = Cuadrilla2</li><li><code>3</code> = Cuadrilla3</li><li><code>4</code> = Cuadrilla4</li><li><code>5</code> = Cuadrilla5</li><li><code>6</code> = Cuadrilla6</li><li><code>7</code> = Cuadrilla7</li><li><code>8</code> = Cuadrilla8</li><li><code>9</code> = Cuadrilla9</li><li><code>10</code> = Cuadrilla10</li></ul>",
         "format": "int32"
       },
       "TipoCuenta": {
@@ -7564,10 +7647,11 @@
           3,
           4,
           5,
-          6
+          6,
+          7
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Vehi001</li><li><code>2</code> = Vehi002</li><li><code>3</code> = Vehi003</li><li><code>4</code> = Vehi004</li><li><code>5</code> = Vehi005</li><li><code>6</code> = Vehi006</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Vehi001</li><li><code>2</code> = Vehi002</li><li><code>3</code> = Vehi003</li><li><code>4</code> = Vehi004</li><li><code>5</code> = Vehi005</li><li><code>6</code> = Vehi006</li><li><code>7</code> = Vehi007</li></ul>",
         "format": "int32"
       },
       "VelocidadTipo": {
