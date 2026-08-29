@@ -79,6 +79,37 @@
         }
       }
     },
+    "/api/v1/Almacenamiento/upload": {
+      "post": {
+        "tags": [
+          "Almacenamiento"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubirArchivoRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubirArchivoRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubirArchivoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Auth/login": {
       "post": {
         "tags": [
@@ -6685,6 +6716,39 @@
         },
         "additionalProperties": false
       },
+      "SubirArchivoRequestDto": {
+        "type": "object",
+        "properties": {
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "base64Content": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreOriginal": {
+            "type": "string",
+            "nullable": true
+          },
+          "entidadId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoEntidad": {
+            "$ref": "#/components/schemas/TipoEntidadEnum"
+          }
+        },
+        "additionalProperties": false
+      },
       "TabletsEmpresaEnum": {
         "enum": [
           0,
@@ -7592,6 +7656,17 @@
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Residencial</li><li><code>1</code> = Cibercafe</li><li><code>2</code> = Corporativo</li><li><code>3</code> = OtrosTipos</li></ul>"
       },
+      "TipoEntidadEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Prospecto</li><li><code>2</code> = Contrato</li><li><code>3</code> = Ticket</li><li><code>3</code> = Ticket</li></ul>",
+        "format": "int32"
+      },
       "TipoIdentificacion": {
         "enum": [
           0,
@@ -7913,6 +7988,9 @@
   "tags": [
     {
       "name": "Adicional"
+    },
+    {
+      "name": "Almacenamiento"
     },
     {
       "name": "Auth"
