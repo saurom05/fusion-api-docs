@@ -4762,6 +4762,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "puntajeTeca": {
+            "type": "integer",
+            "format": "int32"
+          },
           "observacionesGenerales": {
             "type": "string",
             "nullable": true
@@ -7661,10 +7665,11 @@
           0,
           1,
           2,
-          3
+          3,
+          4
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Prospecto</li><li><code>2</code> = Contrato</li><li><code>3</code> = Ticket</li><li><code>3</code> = Ticket</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Prospecto</li><li><code>2</code> = Contrato</li><li><code>3</code> = Ticket</li><li><code>4</code> = FichaTecnica</li></ul>",
         "format": "int32"
       },
       "TipoIdentificacion": {
