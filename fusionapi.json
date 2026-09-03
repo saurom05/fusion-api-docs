@@ -2718,6 +2718,196 @@
         }
       }
     },
+    "/api/v1/Tecas/crear": {
+      "post": {
+        "tags": [
+          "Tecas"
+        ],
+        "summary": "Crear Actividad de Teca en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadTecaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadTecaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadTecaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tecas/actualizar/{id}": {
+      "put": {
+        "tags": [
+          "Tecas"
+        ],
+        "summary": "Modificar una Actividad de Teca en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadTecaUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadTecaUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadTecaUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tecas/{id}": {
+      "get": {
+        "tags": [
+          "Tecas"
+        ],
+        "summary": "Buscar detalles de una Actividad de Teca por Id",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActividadTecaReporteDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Tecas": {
+      "get": {
+        "tags": [
+          "Tecas"
+        ],
+        "summary": "Listado de Actividades de Tecas",
+        "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
+        "parameters": [
+          {
+            "name": "ActividadTecaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TipoActividadId",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = ServicioTecnico</li><li><code>2</code> = NodoCaja</li><li><code>3</code> = TPI</li><li><code>4</code> = ZP4</li><li><code>5</code> = Administrativo</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/TicketTipoEnums"
+            }
+          },
+          {
+            "name": "ArrTipoActividades",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TicketTipoEnums"
+              }
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActividadTecaReporteDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Test": {
       "get": {
         "tags": [
@@ -3175,6 +3365,125 @@
   },
   "components": {
     "schemas": {
+      "ActividadTecaCreateDto": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "puntaje": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "tipoActividad": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActividadTecaReporteDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "puntaje": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "tipoActividad": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "tipoActividadDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActividadTecaReporteDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActividadTecaReporteDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActividadTecaUpdateDto": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "puntaje": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "tipoActividad": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "AdicionalCreateDto": {
         "type": "object",
         "properties": {
@@ -4744,6 +5053,10 @@
           "esReagendamiento": {
             "type": "boolean"
           },
+          "motivoReagendamiento": {
+            "type": "string",
+            "nullable": true
+          },
           "esBodegaEnviar": {
             "type": "boolean"
           },
@@ -5655,6 +5968,13 @@
           "direccionInstalacionId": {
             "type": "integer",
             "format": "int32"
+          },
+          "fotosCedula": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6419,6 +6739,13 @@
           },
           "rowVersion": {
             "type": "string",
+            "nullable": true
+          },
+          "fotosCedula": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },
@@ -8041,6 +8368,9 @@
     },
     {
       "name": "Tareas"
+    },
+    {
+      "name": "Tecas"
     },
     {
       "name": "Test"
