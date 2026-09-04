@@ -1743,6 +1743,50 @@
         }
       }
     },
+    "/api/v1/Planificacion/ficha-tecnica/{id}/bodega/calificacion": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Calificar Ficha Tecnica por Bodega",
+        "description": "Bodega califica los materiales usados en la ficha tecnica y si es necesario devuelve la ficha tecnica para correcciones",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaBodegaUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaBodegaUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaBodegaUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Planificacion/agenda/ficha-tecnica": {
       "get": {
         "tags": [
@@ -4787,10 +4831,11 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = ReAgendada</li><li><code>2</code> = Completada</li><li><code>3</code> = Aprobada</li><li><code>4</code> = Cancelada</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = ReAgendada</li><li><code>2</code> = Completada</li><li><code>3</code> = Aprobada</li><li><code>4</code> = Cancelada</li><li><code>5</code> = DevueltaPorBodega</li></ul>",
         "format": "int32"
       },
       "EstadoNodo": {
@@ -4838,6 +4883,19 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li><li><code>4</code> = Aceptar</li></ul>",
         "format": "int32"
+      },
+      "FichaTecnicaBodegaUpdateDto": {
+        "type": "object",
+        "properties": {
+          "esDevueltoPorBodega": {
+            "type": "boolean"
+          },
+          "observacionBodega": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "FichaTecnicaCreateDto": {
         "type": "object",
@@ -5286,6 +5344,13 @@
             "format": "double"
           },
           "ubicacionEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "esDevueltoPorBodega": {
+            "type": "boolean"
+          },
+          "observacionBodega": {
             "type": "string",
             "nullable": true
           },
