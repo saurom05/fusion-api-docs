@@ -1699,6 +1699,50 @@
         }
       }
     },
+    "/api/v1/Planificacion/ficha-tecnica/{id}/actualizar": {
+      "post": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Actualizar Ficha Tecnica en Cisp",
+        "description": "Para realizar peticiones a este recurso es **necesario el permisos**.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FichaTecnicaUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Planificacion/agenda/tecnico-campo/{id}/activar": {
       "post": {
         "tags": [
@@ -5464,6 +5508,211 @@
             "type": "integer",
             "format": "int32",
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaTecnicaUpdateDto": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agendaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFinal": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tipoFalla": {
+            "$ref": "#/components/schemas/TicketSolucionTipoEnums"
+          },
+          "nuevaFalla": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivoDeFalla": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipoRevisado": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieEquipoRevisado": {
+            "type": "string",
+            "nullable": true
+          },
+          "signalDbmAnterior": {
+            "type": "number",
+            "format": "double"
+          },
+          "signalDbmDespues": {
+            "type": "number",
+            "format": "double"
+          },
+          "solucionAplicada": {
+            "type": "string",
+            "nullable": true
+          },
+          "esRequiereSeguimiento": {
+            "type": "boolean"
+          },
+          "observacionesSeguimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "materiales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaterialesFichaTecnicaDto"
+            },
+            "nullable": true
+          },
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoActividad": {
+            "$ref": "#/components/schemas/TicketTipoEnums"
+          },
+          "tecaObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecaSupervisorObservacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "indicadorTeca": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "puntajeActividadTeca": {
+            "type": "number",
+            "format": "double"
+          },
+          "observacionesGenerales": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotosTrabajo": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "archivoAdicional": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "firmaTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmaCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "esTrabajoFinalizado": {
+            "type": "boolean"
+          },
+          "esRevisadoPorBodega": {
+            "type": "boolean"
+          },
+          "esReagenda": {
+            "type": "boolean"
+          },
+          "motivosReagenda": {
+            "type": "string",
+            "nullable": true
+          },
+          "esCoordenadaEditar": {
+            "type": "boolean"
+          },
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "esPagoCliente": {
+            "type": "boolean"
+          },
+          "montoPago": {
+            "type": "number",
+            "format": "double"
+          },
+          "reciboPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivosPago": {
+            "$ref": "#/components/schemas/MotivosPagoFichaEnum"
+          },
+          "comentarioPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "pruebasVelocidadDescarga": {
+            "type": "number",
+            "format": "double"
+          },
+          "pruebasVelocidadSubida": {
+            "type": "number",
+            "format": "double"
+          },
+          "pruebasPing": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoConexion": {
+            "$ref": "#/components/schemas/RedesAcceso"
+          },
+          "routerOnuAsignado": {
+            "type": "string",
+            "nullable": true
+          },
+          "planIdSnapshot": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroSerieEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddressEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAsignadaEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metrosCableUsado": {
+            "type": "number",
+            "format": "double"
+          },
+          "ubicacionEquipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
