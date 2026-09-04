@@ -3374,8 +3374,7 @@
           },
           "puntaje": {
             "type": "number",
-            "format": "double",
-            "readOnly": true
+            "format": "double"
           },
           "tipoActividad": {
             "$ref": "#/components/schemas/TicketTipoEnums"
@@ -3396,8 +3395,7 @@
           },
           "puntaje": {
             "type": "number",
-            "format": "double",
-            "readOnly": true
+            "format": "double"
           },
           "tipoActividad": {
             "$ref": "#/components/schemas/TicketTipoEnums"
@@ -3468,8 +3466,7 @@
           },
           "puntaje": {
             "type": "number",
-            "format": "double",
-            "readOnly": true
+            "format": "double"
           },
           "tipoActividad": {
             "$ref": "#/components/schemas/TicketTipoEnums"
