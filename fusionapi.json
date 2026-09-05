@@ -2996,6 +2996,96 @@
         }
       }
     },
+    "/api/v1/Tecas/reporte": {
+      "get": {
+        "tags": [
+          "Tecas"
+        ],
+        "parameters": [
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "AsignacionTecnicaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ArrAsignacionTecnicaIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "TecnicoId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Fecha",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "FechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "FechaFinal",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TecnicoDataDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Test": {
       "get": {
         "tags": [
@@ -7409,6 +7499,76 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Tabl001</li><li><code>2</code> = Tabl002</li><li><code>3</code> = Tabl003</li><li><code>4</code> = Tabl004</li><li><code>5</code> = Tabl005</li><li><code>6</code> = Tabl006</li><li><code>7</code> = Tabl007</li><li><code>8</code> = Tabl008</li><li><code>9</code> = Tabl009</li><li><code>10</code> = Tabl010</li></ul>",
         "format": "int32"
       },
+      "TecasActividadesDto": {
+        "type": "object",
+        "properties": {
+          "tecaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaAsignacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "agendaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketAsunto": {
+            "$ref": "#/components/schemas/TicketAsuntoEnums"
+          },
+          "ticketAsuntoDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "actividadTecaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "actividadTecaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "indicador": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "puntaje": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "puntajeOriginal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "notaSupervisor": {
+            "type": "string",
+            "nullable": true
+          },
+          "notaTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "esResponsable": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TecnicoCampoDto": {
         "type": "object",
         "properties": {
@@ -7419,6 +7579,31 @@
           "ticketId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TecnicoDataDto": {
+        "type": "object",
+        "properties": {
+          "tecnicoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombresTecnico": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecasTotales": {
+            "type": "number",
+            "format": "double"
+          },
+          "tecasAsignadas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TecasActividadesDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
