@@ -4527,6 +4527,20 @@
             "type": "string",
             "nullable": true
           },
+          "esRenovacionContrato": {
+            "type": "boolean"
+          },
+          "renovacionContratoIdAnterior": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "esCambioContrato": {
+            "type": "boolean"
+          },
+          "cambioContratoIdAnterior": {
+            "type": "integer",
+            "format": "int32"
+          },
           "createdAt": {
             "type": "string",
             "nullable": true
