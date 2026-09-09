@@ -1875,6 +1875,17 @@
             }
           },
           {
+            "name": "ArrAgendaTecnicaIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
             "name": "EstadosAgendaTecnica",
             "in": "query",
             "schema": {
@@ -5112,8 +5123,8 @@
             "nullable": true
           },
           "indicadorTeca": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "puntajeActividadTeca": {
             "type": "number",
@@ -5261,12 +5272,12 @@
             "nullable": true
           },
           "indicadorTeca": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "puntajeTeca": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "observacionesGenerales": {
             "type": "string",
@@ -5375,8 +5386,8 @@
             "nullable": true
           },
           "indicadorTeca": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "observacionesGenerales": {
             "type": "string",
@@ -5683,8 +5694,8 @@
             "nullable": true
           },
           "indicadorTeca": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "puntajeActividadTeca": {
             "type": "number",
@@ -7510,6 +7521,14 @@
             "type": "string",
             "nullable": true
           },
+          "fechaInicioFicha": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCierreFicha": {
+            "type": "string",
+            "nullable": true
+          },
           "agendaTecnicaId": {
             "type": "integer",
             "format": "int32"
@@ -7553,6 +7572,10 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "puntajeMinutos": {
+            "type": "integer",
+            "format": "int32"
           },
           "notaSupervisor": {
             "type": "string",
@@ -8551,10 +8574,11 @@
           4,
           5,
           6,
-          7
+          7,
+          8
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Vehi001</li><li><code>2</code> = Vehi002</li><li><code>3</code> = Vehi003</li><li><code>4</code> = Vehi004</li><li><code>5</code> = Vehi005</li><li><code>6</code> = Vehi006</li><li><code>7</code> = Vehi007</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Vehi001</li><li><code>2</code> = Vehi002</li><li><code>3</code> = Vehi003</li><li><code>4</code> = Vehi004</li><li><code>5</code> = Vehi005</li><li><code>6</code> = Vehi006</li><li><code>7</code> = Vehi007</li><li><code>8</code> = Vehi008</li></ul>",
         "format": "int32"
       },
       "VelocidadTipo": {
