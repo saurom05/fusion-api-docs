@@ -142,6 +142,147 @@
         }
       }
     },
+    "/api/v1/Bodega/ficha-tecnica/por-aprobar": {
+      "get": {
+        "tags": [
+          "Bodega"
+        ],
+        "summary": "Listado de Ficha Tecnicas por aprobar en Bodega",
+        "description": "Consulta la información del apartado de contratos de la aplicación.\r\n\r\nPara realizar peticiones a este recurso es **necesario el permiso**.\r\n\r\nEl resultado se devuelve con paginación basada en el filtro enviado.",
+        "parameters": [
+          {
+            "name": "AgendaTecnicaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TickedId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FichaTecnicaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "EsBodegaEnviar",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "EsRevisadoPorBodega",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "EsDevueltoPorBodega",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TicketEstado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Nuevo</li><li><code>2</code> = SoporteNivelUno</li><li><code>3</code> = SoporteNivelDos</li><li><code>4</code> = AgendaOperaciones</li><li><code>5</code> = Planificacion</li><li><code>6</code> = TecnicoEnRuta</li><li><code>7</code> = TecnicoEnSitio</li><li><code>8</code> = Reagendacion</li><li><code>9</code> = Desistimiento</li><li><code>10</code> = Seguimiento</li><li><code>11</code> = PendienteRevision</li><li><code>12</code> = RetiroDeEquipo</li><li><code>13</code> = Resuelto</li><li><code>14</code> = Cerrado</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/TicketEstadoEnums"
+            }
+          },
+          {
+            "name": "ArrFichaTecnicaIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "ArrAgendaTecnicaIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "EstadosAgendaTecnica",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FichaTecnicaBodegaDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/nodo/agregar-estado": {
       "post": {
         "tags": [
@@ -743,7 +884,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClienteServicioInternetDtoPagedResult"
+                  "$ref": "#/components/schemas/ClienteVistaInternetDtoPagedResult"
                 }
               }
             }
@@ -3627,6 +3768,282 @@
           }
         }
       }
+    },
+    "/api/v1/Usuarios": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EstadosIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "DocumentoIdentidad",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Nombres",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RolDescripcion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Usuarios/{id}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Usuarios/roles": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Usuarios/{id}/estado": {
+      "patch": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioEstadoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioEstadoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioEstadoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Usuarios/{id}/roles": {
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRolesDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRolesDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRolesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Usuarios/{id}/reset-password": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3979,30 +4396,14 @@
         },
         "additionalProperties": false
       },
-      "ClienteServicioInternetDto": {
+      "ClienteVistaInternetDto": {
         "type": "object",
         "properties": {
-          "idServicio": {
-            "type": "integer",
-            "format": "int32"
-          },
           "idPersona": {
             "type": "integer",
             "format": "int32"
           },
-          "idContrato": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "idServicioInternetDetalle": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ipv4Address": {
-            "type": "string",
-            "nullable": true
-          },
-          "macAddress": {
+          "nombresCliente": {
             "type": "string",
             "nullable": true
           },
@@ -4018,17 +4419,9 @@
             "type": "string",
             "nullable": true
           },
-          "nombresCliente": {
-            "type": "string",
-            "nullable": true
-          },
-          "estado": {
-            "type": "string",
-            "nullable": true
-          },
-          "zona": {
-            "type": "string",
-            "nullable": true
+          "idContrato": {
+            "type": "integer",
+            "format": "int32"
           },
           "fechaInstalacion": {
             "type": "string",
@@ -4038,28 +4431,83 @@
             "type": "string",
             "nullable": true
           },
-          "numeroPagos": {
+          "descuentoInstalacion": {
+            "type": "number",
+            "format": "double"
+          },
+          "esCambioContrato": {
+            "type": "boolean"
+          },
+          "esRenovacionContrato": {
+            "type": "boolean"
+          },
+          "idContratoDetalle": {
             "type": "integer",
             "format": "int32"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "idContratoBeneficio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "idServicioInternetDetalle": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipv4Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
           },
           "router": {
             "type": "string",
             "nullable": true
           },
-          "descuento": {
-            "type": "number",
-            "format": "double"
+          "zona": {
+            "type": "string",
+            "nullable": true
+          },
+          "planInternet": {
+            "type": "string",
+            "nullable": true
+          },
+          "idOportunidadComercial": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "asesor": {
+            "type": "string",
+            "nullable": true
+          },
+          "idAsesor": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroPagos": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
-      "ClienteServicioInternetDtoPagedResult": {
+      "ClienteVistaInternetDtoPagedResult": {
         "type": "object",
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ClienteServicioInternetDto"
+              "$ref": "#/components/schemas/ClienteVistaInternetDto"
             },
             "nullable": true
           },
@@ -5120,6 +5568,83 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li><li><code>4</code> = Aceptar</li></ul>",
         "format": "int32"
       },
+      "FichaTecnicaBodegaDto": {
+        "type": "object",
+        "properties": {
+          "fichaTecnicaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datosTicket": {
+            "$ref": "#/components/schemas/TicketOperacionesDto"
+          },
+          "datosPersona": {
+            "$ref": "#/components/schemas/PersonaOperacionesDto"
+          },
+          "datosDireccionServicio": {
+            "$ref": "#/components/schemas/PersonaDireccionOperacionesDto"
+          },
+          "datosAgendaTecnica": {
+            "$ref": "#/components/schemas/AgendaTecnicaSoporteDto"
+          },
+          "datosAsignacionTecnica": {
+            "$ref": "#/components/schemas/AsignacionTecnicaOperacionesDto"
+          },
+          "fechaFichaInicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "estadoFichaTecnica": {
+            "$ref": "#/components/schemas/EstadoFichaTecnicaEnum"
+          },
+          "estadoFichaTecnicaDescripcion": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "esBodegaEnviar": {
+            "type": "boolean"
+          },
+          "esRevisadoPorBodega": {
+            "type": "boolean"
+          },
+          "fechaCierreBodega": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaTecnicaBodegaDtoPagedResult": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FichaTecnicaBodegaDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "FichaTecnicaBodegaUpdateDto": {
         "type": "object",
         "properties": {
@@ -5505,6 +6030,9 @@
           "firmaCliente": {
             "type": "string",
             "nullable": true
+          },
+          "esBodegaEnviar": {
+            "type": "boolean"
           },
           "esRevisadoPorBodega": {
             "type": "boolean"
@@ -6656,6 +7184,13 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "fotosConsentimiento": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7423,6 +7958,13 @@
             "nullable": true
           },
           "fotosCedula": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "fotosConsentimiento": {
             "type": "array",
             "items": {
               "type": "string"
@@ -8844,6 +9386,140 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Internet</li><li><code>2</code> = Television</li><li><code>3</code> = Seguridad</li><li><code>4</code> = Rastreo</li></ul>",
         "format": "int32"
       },
+      "UsuarioCreateDto": {
+        "required": [
+          "documentoIdentidad",
+          "email",
+          "nombres",
+          "phoneNumber",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "userName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "nombres": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "format": "email"
+          },
+          "phoneNumber": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string"
+          },
+          "documentoIdentidad": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "roles": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "password": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioEstadoDto": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioRolesDto": {
+        "type": "object",
+        "properties": {
+          "roles": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioUpdateDto": {
+        "required": [
+          "documentoIdentidad",
+          "email",
+          "nombres",
+          "phoneNumber",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "userName": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "nombres": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string",
+            "format": "email"
+          },
+          "avatar": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "phoneNumber": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string"
+          },
+          "documentoIdentidad": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "VehiculoEmpresaEnum": {
         "enum": [
           0,
@@ -9127,6 +9803,9 @@
       "name": "Auth"
     },
     {
+      "name": "Bodega"
+    },
+    {
       "name": "Catalogo"
     },
     {
@@ -9185,6 +9864,9 @@
     },
     {
       "name": "Ubicacion"
+    },
+    {
+      "name": "Usuarios"
     }
   ]
 }
