@@ -385,6 +385,114 @@
         }
       }
     },
+    "/api/v1/Catalogo/producto/opciones": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "summary": "Productos persistidos para el formulario de ingreso. Acepta termino para buscar por código o nombre.",
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoOpcionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoOpcionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoOpcionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/producto/tipo-material/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Catalogo/producto": {
+      "post": {
+        "tags": [
+          "Catalogo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoOpcionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoOpcionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoOpcionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/persona/estado-persona/combo": {
       "get": {
         "tags": [
@@ -1379,6 +1487,301 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ingreso/catalogos": {
+      "get": {
+        "tags": [
+          "Ingreso"
+        ],
+        "summary": "Catálogos del formulario Nuevo Ingreso: bodega, centro de costo, categoría, unidad, proveedor, estados y tipos de material.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoCatalogosDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoCatalogosDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoCatalogosDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Ingreso": {
+      "get": {
+        "tags": [
+          "Ingreso"
+        ],
+        "summary": "Lista de ingresos de materiales a bodega. Una fila por producto.\r\nFiltros de la pantalla: Estado=Recibido|Pendiente|Parcial y SinObservaciones=true.",
+        "parameters": [
+          {
+            "name": "TerminoBusqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Parcial</li><li><code>3</code> = Recibido</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoIngreso"
+            }
+          },
+          {
+            "name": "SinObservaciones",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ProveedorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "BodegaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoListadoResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoListadoResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoListadoResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ingreso"
+        ],
+        "summary": "Guarda un ingreso. El número de movimiento se genera como ING-yyyyMMdd-0001.\r\nSi la línea no envía estado, queda Recibido por la cantidad indicada.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngresoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngresoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngresoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Ingreso/{id}": {
+      "get": {
+        "tags": [
+          "Ingreso"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Ingreso/detalle/{detalleId}": {
+      "put": {
+        "tags": [
+          "Ingreso"
+        ],
+        "summary": "Actualiza una línea del listado: cantidad, estado (Pendiente, Parcial, Recibido) y observaciones.",
+        "parameters": [
+          {
+            "name": "detalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngresoDetalleUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngresoDetalleUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngresoDetalleUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDetalleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDetalleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngresoDetalleDto"
+                }
+              }
+            }
           }
         }
       }
@@ -5522,6 +5925,16 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = ReAgendada</li><li><code>2</code> = Completada</li><li><code>3</code> = Aprobada</li><li><code>4</code> = Cancelada</li><li><code>5</code> = DevueltaPorBodega</li></ul>",
         "format": "int32"
       },
+      "EstadoIngreso": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Parcial</li><li><code>3</code> = Recibido</li></ul>",
+        "format": "int32"
+      },
       "EstadoNodo": {
         "enum": [
           0,
@@ -6601,6 +7014,488 @@
         },
         "additionalProperties": false
       },
+      "IngresoCatalogosDto": {
+        "type": "object",
+        "properties": {
+          "bodegas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "centrosCosto": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "categorias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "unidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "proveedores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "estados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "tiposMaterial": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoCreateDto": {
+        "required": [
+          "detalles",
+          "fecha"
+        ],
+        "type": "object",
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "proveedorId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodegaId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "centroCostoId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroDocumento": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngresoDetalleCreateDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoDetalleCreateDto": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaMaterialId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoMaterial": {
+            "$ref": "#/components/schemas/TipoMaterial"
+          },
+          "controlaSerie": {
+            "type": "boolean"
+          },
+          "cantidad": {
+            "maximum": 999999999,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadRecibida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioPvp": {
+            "maximum": 999999999,
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoIngreso"
+          },
+          "observaciones": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoDetalleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaMaterialId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadRecibida": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioPvp": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoIngreso"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoDetalleUpdateDto": {
+        "type": "object",
+        "properties": {
+          "cantidad": {
+            "maximum": 999999999,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadRecibida": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioPvp": {
+            "maximum": 999999999,
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoIngreso"
+          },
+          "observaciones": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaMaterialId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroMovimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "proveedorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodega": {
+            "type": "string",
+            "nullable": true
+          },
+          "centroCostoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "centroCosto": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngresoDetalleDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoListadoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ingresoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroMovimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "proveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadRecibida": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioPvp": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoIngreso"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IngresoListadoResultadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngresoListadoDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalUnidades": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalGeneral": {
+            "type": "number",
+            "format": "double"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InventarioOpcionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDto": {
         "required": [
           "password",
@@ -7424,6 +8319,108 @@
           }
         },
         "additionalProperties": { }
+      },
+      "ProductoCreateDto": {
+        "required": [
+          "codigo",
+          "nombre"
+        ],
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "maxLength": 40,
+            "minLength": 0,
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "descripcion": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaMaterialId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "precioPvp": {
+            "maximum": 999999999,
+            "minimum": 0,
+            "type": "number",
+            "format": "double"
+          },
+          "controlaSerie": {
+            "type": "boolean"
+          },
+          "tipoMaterial": {
+            "$ref": "#/components/schemas/TipoMaterial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductoOpcionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaMaterialId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "precioPvp": {
+            "type": "number",
+            "format": "double"
+          },
+          "controlaSerie": {
+            "type": "boolean"
+          },
+          "tipoMaterial": {
+            "$ref": "#/components/schemas/TipoMaterial"
+          },
+          "tipoMaterialNombre": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ProductoResumenDto": {
         "type": "object",
@@ -9349,6 +10346,19 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Cedula</li><li><code>1</code> = Ruc</li><li><code>2</code> = Pasaporte</li></ul>",
         "format": "int32"
       },
+      "TipoMaterial": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = SinClasificar</li><li><code>1</code> = Red</li><li><code>2</code> = Fibra</li><li><code>3</code> = Equipo</li><li><code>4</code> = Oficina</li><li><code>5</code> = Herramienta</li></ul>",
+        "format": "int32"
+      },
       "TipoPersona": {
         "enum": [
           0,
@@ -9819,6 +10829,9 @@
     },
     {
       "name": "Empresa"
+    },
+    {
+      "name": "Ingreso"
     },
     {
       "name": "Meta"
