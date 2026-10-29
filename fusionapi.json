@@ -445,6 +445,18 @@
         }
       }
     },
+    "/api/v1/Catalogo/producto/modo-control/combo": {
+      "get": {
+        "tags": [
+          "Catalogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Catalogo/producto": {
       "post": {
         "tags": [
@@ -1088,6 +1100,130 @@
         }
       }
     },
+    "/api/v1/Contifico/productos/descargar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/productos/sincronizar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "summary": "Enlaza el staging con Producto por código. El id entero no cambia.\r\nEl id de Contifico queda en Integracion.Mapeo.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoSincronizacionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoSincronizacionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoSincronizacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/productos": {
+      "get": {
+        "tags": [
+          "Contifico"
+        ],
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoProductoListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoProductoListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoProductoListadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Contrato/crear": {
       "post": {
         "tags": [
@@ -1460,6 +1596,507 @@
         }
       }
     },
+    "/api/v1/Egreso/catalogos": {
+      "get": {
+        "tags": [
+          "Egreso"
+        ],
+        "summary": "Catálogos del egreso: bodegas, responsables, motivos, stock y estados.\r\nbodegaId limita el stock a esa bodega.",
+        "parameters": [
+          {
+            "name": "bodegaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoCatalogosDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoCatalogosDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoCatalogosDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Egreso": {
+      "get": {
+        "tags": [
+          "Egreso"
+        ],
+        "summary": "Lista de egresos. Una fila por producto.\r\nFiltros: Estado=Despachado|Pendiente|Anulado y SinObservaciones=true.",
+        "parameters": [
+          {
+            "name": "TerminoBusqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Despachado</li><li><code>3</code> = Anulado</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoEgreso"
+            }
+          },
+          {
+            "name": "Tipo",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Asignacion</li><li><code>2</code> = Baja</li><li><code>3</code> = Devolucion</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/TipoEgreso"
+            }
+          },
+          {
+            "name": "SinObservaciones",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "BodegaOrigenId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ResponsableId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoListadoResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoListadoResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoListadoResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Egreso"
+        ],
+        "summary": "Si la bodega de origen es la principal, el stock pasa a la mini-bodega del responsable.\r\nSi la origen ya es una mini-bodega, el stock se consume. TicketId es opcional.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EgresoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EgresoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EgresoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Egreso/activos/buscar": {
+      "get": {
+        "tags": [
+          "Egreso"
+        ],
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivoConsultaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivoConsultaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivoConsultaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Egreso/{id}": {
+      "get": {
+        "tags": [
+          "Egreso"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Egreso/detalle/{detalleId}": {
+      "put": {
+        "tags": [
+          "Egreso"
+        ],
+        "parameters": [
+          {
+            "name": "detalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EgresoDetalleUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EgresoDetalleUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EgresoDetalleUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDetalleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDetalleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EgresoDetalleDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Egreso/existencias": {
+      "get": {
+        "tags": [
+          "Egreso"
+        ],
+        "parameters": [
+          {
+            "name": "bodegaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExistenciaDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExistenciaDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExistenciaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Egreso/movimientos": {
+      "get": {
+        "tags": [
+          "Egreso"
+        ],
+        "parameters": [
+          {
+            "name": "BodegaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovimientoInventarioDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovimientoInventarioDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovimientoInventarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Empresa/crear": {
       "post": {
         "tags": [
@@ -1487,6 +2124,548 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/contexto": {
+      "get": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "summary": "Técnico de la sesión y bodega principal de donde sale el material.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionContextoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionContextoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionContextoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/stock": {
+      "get": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "summary": "Stock de la bodega principal para el panel derecho. termino filtra por código, nombre, marca o modelo.",
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GuiaStockDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GuiaStockDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GuiaStockDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/tickets": {
+      "get": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "summary": "Combo de tickets. Busca por número, contacto o id y devuelve datos para armar el destino.",
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GuiaTicketOpcionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GuiaTicketOpcionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GuiaTicketOpcionDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision": {
+      "get": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "parameters": [
+          {
+            "name": "TerminoBusqueda",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Solicitada</li><li><code>2</code> = Devuelta</li><li><code>3</code> = Autorizada</li><li><code>4</code> = Anulada</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoGuiaRemision"
+            }
+          },
+          {
+            "name": "TecnicoSolicitanteId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SoloMias",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionListadoResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionListadoResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionListadoResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "summary": "El técnico logueado envía la solicitud. El stock no se mueve hasta autorizar.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/{id}": {
+      "get": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/{id}/autorizar": {
+      "post": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "summary": "La bodega autoriza y el material pasa a la mini-bodega del técnico mediante un egreso de asignación.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/{id}/devolver": {
+      "post": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionDevolverDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionDevolverDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuiaRemisionDevolverDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/{id}/reenviar": {
+      "post": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/GuiaRemision/{id}/anular": {
+      "post": {
+        "tags": [
+          "GuiaRemision"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuiaRemisionDto"
+                }
+              }
+            }
           }
         }
       }
@@ -4567,6 +5746,130 @@
         },
         "additionalProperties": false
       },
+      "ActivoConsultaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodega": {
+            "type": "string",
+            "nullable": true
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoBarras": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoActivoInventario"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "costoUnitario": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActivoIdentidadDto": {
+        "required": [
+          "mac",
+          "serie"
+        ],
+        "type": "object",
+        "properties": {
+          "serie": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string"
+          },
+          "mac": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string"
+          },
+          "codigoBarras": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActivoOpcionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodegaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoBarras": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoActivoInventario"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AdicionalCreateDto": {
         "type": "object",
         "properties": {
@@ -4776,6 +6079,35 @@
             "items": {
               "$ref": "#/components/schemas/DatosTenicoResumenDto"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BodegaOpcionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoBodega"
+          },
+          "tipoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsableId": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -5010,6 +6342,163 @@
             "type": "integer",
             "format": "int32",
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoDescargaDto": {
+        "type": "object",
+        "properties": {
+          "paginas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recibidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nuevos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actualizados": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoProductoListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContificoProductoStagingDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoProductoOmitidoDto": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoProductoStagingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoProducto": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "pvp1": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "codigoBarra": {
+            "type": "string",
+            "nullable": true
+          },
+          "marcaNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidadStock": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoSincronizacionDto": {
+        "type": "object",
+        "properties": {
+          "enlazados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "creados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yaEnlazados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "omitidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleOmitidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContificoProductoOmitidoDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5807,6 +7296,486 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = AtencionCliente</li><li><code>1</code> = SoporteTecnico</li><li><code>2</code> = Ventas</li><li><code>3</code> = Administracion</li><li><code>4</code> = Sistemas</li></ul>",
         "format": "int32"
       },
+      "EgresoCatalogosDto": {
+        "type": "object",
+        "properties": {
+          "bodegas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BodegaOpcionDto"
+            },
+            "nullable": true
+          },
+          "centrosCosto": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "motivosBaja": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "responsables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponsableOpcionDto"
+            },
+            "nullable": true
+          },
+          "estados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "tipos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          },
+          "stock": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExistenciaDto"
+            },
+            "nullable": true
+          },
+          "activos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivoOpcionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoCreateDto": {
+        "required": [
+          "detalles",
+          "fecha",
+          "responsableId"
+        ],
+        "type": "object",
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "responsableId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "motivoBajaId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodegaOrigenId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "centroCostoId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "devolverAPrincipal": {
+            "type": "boolean"
+          },
+          "descripcion": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgresoDetalleCreateDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoDetalleCreateDto": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "maximum": 999999999,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "activoIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoEgreso"
+          },
+          "observaciones": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoDetalleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "costoUnitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "activos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivoOpcionDto"
+            },
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoEgreso"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoDetalleUpdateDto": {
+        "type": "object",
+        "properties": {
+          "cantidad": {
+            "maximum": 999999999,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoEgreso"
+          },
+          "serie": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "activoIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "observaciones": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroMovimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "responsableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsable": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivoBajaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaOrigenId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodegaOrigen": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaDestinoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "bodegaDestino": {
+            "type": "string",
+            "nullable": true
+          },
+          "centroCostoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "centroCosto": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoEgreso"
+          },
+          "tipoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "esAsignacion": {
+            "type": "boolean"
+          },
+          "esDevolucion": {
+            "type": "boolean"
+          },
+          "detalles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgresoDetalleDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoListadoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "egresoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroMovimiento": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoEgreso"
+          },
+          "tipoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "responsableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "costoUnitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoEgreso"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "observaciones": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "bodegaOrigen": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaDestino": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EgresoListadoResultadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgresoListadoDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalUnidades": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalGeneral": {
+            "type": "number",
+            "format": "double"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "EmpresaCreateDto": {
         "type": "object",
         "properties": {
@@ -5861,6 +7830,16 @@
         },
         "additionalProperties": false
       },
+      "EstadoActivoInventario": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Disponible</li><li><code>2</code> = Instalado</li><li><code>3</code> = Baja</li></ul>",
+        "format": "int32"
+      },
       "EstadoAgendaTecnica": {
         "enum": [
           0,
@@ -5889,6 +7868,16 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = EnRevision</li><li><code>1</code> = Pendiente</li><li><code>2</code> = PorInstalar</li><li><code>3</code> = Activo</li><li><code>4</code> = Suspendido</li><li><code>5</code> = Anulado</li><li><code>6</code> = Cancelado</li><li><code>7</code> = Terminado</li><li><code>8</code> = Renovado</li></ul>",
+        "format": "int32"
+      },
+      "EstadoEgreso": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Despachado</li><li><code>3</code> = Anulado</li></ul>",
         "format": "int32"
       },
       "EstadoFasesProspecto": {
@@ -5923,6 +7912,17 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = ReAgendada</li><li><code>2</code> = Completada</li><li><code>3</code> = Aprobada</li><li><code>4</code> = Cancelada</li><li><code>5</code> = DevueltaPorBodega</li></ul>",
+        "format": "int32"
+      },
+      "EstadoGuiaRemision": {
+        "enum": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Solicitada</li><li><code>2</code> = Devuelta</li><li><code>3</code> = Autorizada</li><li><code>4</code> = Anulada</li></ul>",
         "format": "int32"
       },
       "EstadoIngreso": {
@@ -5980,6 +7980,52 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = Pendiente</li><li><code>2</code> = Completado</li><li><code>3</code> = Fallido</li><li><code>4</code> = Aceptar</li></ul>",
         "format": "int32"
+      },
+      "ExistenciaDto": {
+        "type": "object",
+        "properties": {
+          "bodegaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodega": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "costoUnitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "controlaSerie": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
       },
       "FichaTecnicaBodegaDto": {
         "type": "object",
@@ -6874,6 +8920,421 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = PendientePago</li><li><code>2</code> = Pagada</li><li><code>3</code> = Cancelada</li><li><code>4</code> = EnRevision</li><li><code>5</code> = SeTransfirio</li><li><code>6</code> = PagoParcial</li></ul>",
         "format": "int32"
       },
+      "GuiaRemisionContextoDto": {
+        "type": "object",
+        "properties": {
+          "tecnicoSolicitanteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecnicoSolicitante": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaPrincipalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodegaPrincipal": {
+            "type": "string",
+            "nullable": true
+          },
+          "estados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionCreateDto": {
+        "required": [
+          "destinoProyecto",
+          "detalles"
+        ],
+        "type": "object",
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "destinoProyecto": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detalles": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuiaRemisionLineaDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionDetalleDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "disponible": {
+            "type": "number",
+            "format": "double"
+          },
+          "modoControl": {
+            "$ref": "#/components/schemas/ModoControlInventario"
+          },
+          "modoControlNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "controlaSerie": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionDevolverDto": {
+        "type": "object",
+        "properties": {
+          "observacion": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tecnicoSolicitanteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecnicoSolicitante": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinoProyecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactoTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoGuiaRemision"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacionBodega": {
+            "type": "string",
+            "nullable": true
+          },
+          "egresoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroEgreso": {
+            "type": "string",
+            "nullable": true
+          },
+          "puedeEditar": {
+            "type": "boolean"
+          },
+          "puedeAutorizar": {
+            "type": "boolean"
+          },
+          "puedeDevolver": {
+            "type": "boolean"
+          },
+          "puedeReenviar": {
+            "type": "boolean"
+          },
+          "puedeAnular": {
+            "type": "boolean"
+          },
+          "detalles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuiaRemisionDetalleDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionLineaDto": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
+            "maximum": 999999999,
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionListadoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tecnicoSolicitanteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tecnicoSolicitante": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinoProyecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoGuiaRemision"
+          },
+          "estadoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacionBodega": {
+            "type": "string",
+            "nullable": true
+          },
+          "egresoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numeroEgreso": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidadProductos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalUnidades": {
+            "type": "number",
+            "format": "double"
+          },
+          "puedeAutorizar": {
+            "type": "boolean"
+          },
+          "puedeDevolver": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionListadoResultadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuiaRemisionListadoDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaRemisionUpdateDto": {
+        "required": [
+          "destinoProyecto",
+          "detalles"
+        ],
+        "type": "object",
+        "properties": {
+          "destinoProyecto": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "ticketId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detalles": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GuiaRemisionLineaDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaStockDto": {
+        "type": "object",
+        "properties": {
+          "bodegaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "disponible": {
+            "type": "number",
+            "format": "double"
+          },
+          "modoControl": {
+            "$ref": "#/components/schemas/ModoControlInventario"
+          },
+          "modoControlNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "controlaSerie": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuiaTicketOpcionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "IncidenteDetallesDto": {
         "type": "object",
         "properties": {
@@ -7065,6 +9526,13 @@
               "$ref": "#/components/schemas/InventarioOpcionDto"
             },
             "nullable": true
+          },
+          "modosControl": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventarioOpcionDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7155,6 +9623,17 @@
           "controlaSerie": {
             "type": "boolean"
           },
+          "modoControl": {
+            "$ref": "#/components/schemas/ModoControlInventario"
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
+          },
           "cantidad": {
             "maximum": 999999999,
             "minimum": 0.01,
@@ -7176,6 +9655,13 @@
             "maxLength": 80,
             "minLength": 0,
             "type": "string",
+            "nullable": true
+          },
+          "identidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivoIdentidadDto"
+            },
             "nullable": true
           },
           "estado": {
@@ -7247,6 +9733,16 @@
             "type": "string",
             "nullable": true
           },
+          "controlaSerie": {
+            "type": "boolean"
+          },
+          "identidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivoIdentidadDto"
+            },
+            "nullable": true
+          },
           "estado": {
             "$ref": "#/components/schemas/EstadoIngreso"
           },
@@ -7285,6 +9781,13 @@
             "maxLength": 80,
             "minLength": 0,
             "type": "string",
+            "nullable": true
+          },
+          "identidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivoIdentidadDto"
+            },
             "nullable": true
           },
           "estado": {
@@ -7549,6 +10052,16 @@
         },
         "additionalProperties": false
       },
+      "ModoControlInventario": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Cantidad</li><li><code>2</code> = Medida</li><li><code>3</code> = Serie</li></ul>",
+        "format": "int32"
+      },
       "MotivosPagoFichaEnum": {
         "enum": [
           0,
@@ -7561,6 +10074,63 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = PagoInstalacion</li><li><code>2</code> = PagoMesCurso</li><li><code>3</code> = PagoMesAdelanto</li><li><code>4</code> = PagoProrrateo</li><li><code>5</code> = OtroPago</li></ul>",
         "format": "int32"
+      },
+      "MovimientoInventarioDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoMovimientoInventario"
+          },
+          "tipoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "bodegaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bodega": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "producto": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "saldo": {
+            "type": "number",
+            "format": "double"
+          },
+          "costoUnitario": {
+            "type": "number",
+            "format": "double"
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "NodoCreateDto": {
         "type": "object",
@@ -8362,6 +10932,21 @@
           "controlaSerie": {
             "type": "boolean"
           },
+          "modoControl": {
+            "$ref": "#/components/schemas/ModoControlInventario"
+          },
+          "marca": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
           "tipoMaterial": {
             "$ref": "#/components/schemas/TipoMaterial"
           }
@@ -8411,6 +10996,21 @@
           },
           "controlaSerie": {
             "type": "boolean"
+          },
+          "modoControl": {
+            "$ref": "#/components/schemas/ModoControlInventario"
+          },
+          "modoControlNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
           },
           "tipoMaterial": {
             "$ref": "#/components/schemas/TipoMaterial"
@@ -9206,6 +11806,24 @@
         ],
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = ParDeCobre</li><li><code>1</code> = Coaxial</li><li><code>2</code> = Otros</li><li><code>3</code> = FibraOptica</li><li><code>4</code> = Inalambrico</li></ul>"
+      },
+      "ResponsableOpcionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "SecuenciaIpCreate": {
         "type": "object",
@@ -10288,6 +12906,15 @@
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Fisico</li><li><code>1</code> = Digital</li></ul>"
       },
+      "TipoBodega": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Principal</li><li><code>2</code> = Mini</li></ul>",
+        "format": "int32"
+      },
       "TipoCuadrillaTecnica": {
         "enum": [
           0,
@@ -10324,6 +12951,16 @@
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Residencial</li><li><code>1</code> = Cibercafe</li><li><code>2</code> = Corporativo</li><li><code>3</code> = OtrosTipos</li></ul>"
       },
+      "TipoEgreso": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Asignacion</li><li><code>2</code> = Baja</li><li><code>3</code> = Devolucion</li></ul>",
+        "format": "int32"
+      },
       "TipoEntidadEnum": {
         "enum": [
           0,
@@ -10357,6 +12994,18 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = SinClasificar</li><li><code>1</code> = Red</li><li><code>2</code> = Fibra</li><li><code>3</code> = Equipo</li><li><code>4</code> = Oficina</li><li><code>5</code> = Herramienta</li></ul>",
+        "format": "int32"
+      },
+      "TipoMovimientoInventario": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Ingreso</li><li><code>2</code> = Asignacion</li><li><code>3</code> = Baja</li><li><code>4</code> = Ajuste</li><li><code>5</code> = Devolucion</li></ul>",
         "format": "int32"
       },
       "TipoPersona": {
@@ -10825,10 +13474,19 @@
       "name": "Comprobante"
     },
     {
+      "name": "Contifico"
+    },
+    {
       "name": "Contrato"
     },
     {
+      "name": "Egreso"
+    },
+    {
       "name": "Empresa"
+    },
+    {
+      "name": "GuiaRemision"
     },
     {
       "name": "Ingreso"
