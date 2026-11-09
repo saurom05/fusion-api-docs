@@ -1596,6 +1596,54 @@
         }
       }
     },
+    "/api/v1/Contrato/{id}/fisico": {
+      "delete": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Borra el contrato y sus hijos propios (ContratoDetalle, ContratoBeneficio y ServicioInternetDetalle).\r\nSi otra tabla los referencia, no borra nada y devuelve esas tablas.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Contrato/{id}/estado": {
+      "delete": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Anula el contrato y cambia el estado de sus hijos propios\r\n(ContratoDetalle, ContratoBeneficio y ServicioInternetDetalle).\r\nSi otra tabla los referencia, no cambia nada y devuelve esas tablas.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Egreso/catalogos": {
       "get": {
         "tags": [
@@ -2093,6 +2141,18 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/Empresa/actual": {
+      "get": {
+        "tags": [
+          "Empresa"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -2675,7 +2735,7 @@
         "tags": [
           "Ingreso"
         ],
-        "summary": "Catálogos del formulario Nuevo Ingreso: bodega, centro de costo, categoría, unidad, proveedor, estados y tipos de material.",
+        "summary": "Catálogos del formulario Nuevo Ingreso: bodega principal, centro de costo, categoría, unidad, proveedor, estados y tipos de material.",
         "responses": {
           "200": {
             "description": "OK",
@@ -3053,13 +3113,32 @@
         }
       }
     },
+    "/api/v1/NetworkDevice/equipos/descargar": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Descarga el listado de equipos y lo guarda en Mikrotik.EquipoStaging.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MikrotikEquipoDescargaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/NetworkDevice/incidentes/{id}": {
       "get": {
         "tags": [
           "NetworkDevice"
         ],
-        "summary": "Listar incidentes por ID de nodo",
-        "description": "El resultado devuelve todos los incidentes y detalles asociados a un nodo específico identificado por su ID.",
+        "summary": "Detalle de un incidente por id de nodo.",
         "parameters": [
           {
             "name": "id",
@@ -3090,15 +3169,145 @@
         "tags": [
           "NetworkDevice"
         ],
-        "summary": "Listar incidentes por ID de nodo",
-        "description": "El resultado devuelve todos los incidentes y detalles asociados a un nodo específico identificado por su ID.",
+        "summary": "Incidentes del día.",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IncidentesDto"
+                  "$ref": "#/components/schemas/IncidentesResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/equipos/{id}/test-conexion": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Prueba la conexión del backend de MikroTik contra un equipo.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MikrotikOperacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/equipos/{id}/suspender": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Suspende un cliente en el equipo: lo agrega a la lista Moroso y configura el aviso de corte.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuspenderClienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuspenderClienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuspenderClienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MikrotikOperacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/equipos/{id}/reactivar": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Reactiva un cliente en el equipo: quita la IP de la lista Moroso y la redirección del proxy.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReactivarClienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReactivarClienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReactivarClienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MikrotikOperacionDto"
                 }
               }
             }
@@ -4011,6 +4220,150 @@
         }
       }
     },
+    "/api/v1/Planificacion/agenda/{id}/fisico": {
+      "delete": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Borra la agenda y sus asignaciones solo si no tiene ficha tecnica.\r\nSi hay ficha, no borra nada y devuelve que debe revisarse.\r\nEl ticket padre se conserva. Si guardaba el id de esta agenda o de una asignacion borrada, ese puntero se limpia.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/agenda/{id}/estado": {
+      "delete": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Cancela la agenda y sus asignaciones solo si no tiene ficha tecnica.\r\nSi hay ficha, no cambia nada y devuelve que debe revisarse.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/ficha-tecnica/{id}/fisico": {
+      "delete": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Borra una ficha tecnica. Ninguna tabla la referencia como llave foranea.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/ficha-tecnica/{id}/estado": {
+      "delete": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Cancela una ficha tecnica.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/asignacion/{id}/fisico": {
+      "delete": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Borra una asignacion tecnica. Si un ticket guarda ese id, el puntero se limpia.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Planificacion/asignacion/{id}/estado": {
+      "delete": {
+        "tags": [
+          "Planificacion"
+        ],
+        "summary": "Desactiva una asignacion tecnica.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Promociones/crear": {
       "post": {
         "tags": [
@@ -4532,6 +4885,49 @@
       }
     },
     "/api/v1/Tareas/descargar-clientes-wisphub": {
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WisphubRequestFilter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WisphubRequestFilter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WisphubRequestFilter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tareas/enriquecer-clientes-wisphub": {
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tareas/descargar-servicios-adicionales-wisphub": {
       "post": {
         "tags": [
           "Tareas"
@@ -5223,6 +5619,102 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/{id}/fisico": {
+      "delete": {
+        "tags": [
+          "Ticket"
+        ],
+        "summary": "Borra el ticket y sus seguimientos.\r\nSi tiene agenda, asignacion, ficha, egreso o guia de remision, no borra nada y devuelve esas tablas.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/{id}/estado": {
+      "delete": {
+        "tags": [
+          "Ticket"
+        ],
+        "summary": "Cierra el ticket y desactiva sus seguimientos.\r\nSi tiene agenda, asignacion, ficha, egreso o guia de remision, no cambia nada y devuelve esas tablas.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/seguimiento/{id}/fisico": {
+      "delete": {
+        "tags": [
+          "Ticket"
+        ],
+        "summary": "Borra un seguimiento del ticket. No tiene hijos ni foraneas que lo bloqueen.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/seguimiento/{id}/estado": {
+      "delete": {
+        "tags": [
+          "Ticket"
+        ],
+        "summary": "Desactiva un seguimiento del ticket.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -7259,6 +7751,20 @@
         "properties": {
           "estado": {
             "$ref": "#/components/schemas/WisphubServicioEstado"
+          },
+          "externalIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "acciones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7826,6 +8332,10 @@
           "latitud": {
             "type": "number",
             "format": "double"
+          },
+          "zonaHoraria": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7878,6 +8388,17 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Despachado</li><li><code>3</code> = Anulado</li></ul>",
+        "format": "int32"
+      },
+      "EstadoEquipoFicha": {
+        "enum": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Actual</li><li><code>2</code> = Instalado</li><li><code>3</code> = PorCambio</li><li><code>4</code> = Danado</li></ul>",
         "format": "int32"
       },
       "EstadoFasesProspecto": {
@@ -8023,6 +8544,35 @@
           },
           "controlaSerie": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FichaEquipoDto": {
+        "required": [
+          "macEquipo",
+          "modeloEquipo",
+          "serieEquipo"
+        ],
+        "type": "object",
+        "properties": {
+          "serieEquipo": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "modeloEquipo": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "macEquipo": {
+            "minLength": 1,
+            "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$",
+            "type": "string"
+          },
+          "estadoEquipo": {
+            "$ref": "#/components/schemas/EstadoEquipoFicha"
           }
         },
         "additionalProperties": false
@@ -8311,6 +8861,14 @@
           "ubicacionEquipo": {
             "type": "string",
             "nullable": true
+          },
+          "fichaEquipos": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FichaEquipoDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8568,6 +9126,13 @@
           },
           "ubicacionEquipo": {
             "type": "string",
+            "nullable": true
+          },
+          "fichaEquipos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FichaEquipoDto"
+            },
             "nullable": true
           },
           "esDevueltoPorBodega": {
@@ -8884,6 +9449,14 @@
           },
           "ubicacionEquipo": {
             "type": "string",
+            "nullable": true
+          },
+          "fichaEquipos": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FichaEquipoDto"
+            },
             "nullable": true
           },
           "id": {
@@ -9475,6 +10048,22 @@
         },
         "additionalProperties": false
       },
+      "IncidentesResponseDto": {
+        "type": "object",
+        "properties": {
+          "incidentes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IncidentesDto"
+            },
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "IngresoCatalogosDto": {
         "type": "object",
         "properties": {
@@ -10048,6 +10637,72 @@
           "cantidad": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MikrotikEquipoDescargaDto": {
+        "type": "object",
+        "properties": {
+          "recibidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nuevos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actualizados": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MikrotikOperacionDetalleDto": {
+        "type": "object",
+        "properties": {
+          "address_list": {
+            "type": "string",
+            "nullable": true
+          },
+          "proxy_redirect": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MikrotikOperacionDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "puerto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ip_cliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "$ref": "#/components/schemas/MikrotikOperacionDetalleDto"
           }
         },
         "additionalProperties": false
@@ -11796,6 +12451,20 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Nuevos</li><li><code>1</code> = Existentes</li><li><code>2</code> = Ambos</li></ul>",
         "format": "int32"
       },
+      "ReactivarClienteDto": {
+        "required": [
+          "ipCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "ipCliente": {
+            "maxLength": 45,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "RedesAcceso": {
         "enum": [
           "ParDeCobre",
@@ -11914,6 +12583,32 @@
           },
           "tipoEntidad": {
             "$ref": "#/components/schemas/TipoEntidadEnum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SuspenderClienteDto": {
+        "required": [
+          "ipCliente",
+          "nombreCliente"
+        ],
+        "type": "object",
+        "properties": {
+          "ipCliente": {
+            "maxLength": 45,
+            "minLength": 0,
+            "type": "string"
+          },
+          "nombreCliente": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string"
+          },
+          "idCliente": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -13423,6 +14118,10 @@
           "fecha_creacion_1": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
             "nullable": true
           }
         },
