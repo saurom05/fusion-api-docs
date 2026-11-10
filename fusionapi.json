@@ -10637,6 +10637,10 @@
           "cantidad": {
             "type": "integer",
             "format": "int32"
+          },
+          "tecnico": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
