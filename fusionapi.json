@@ -1100,6 +1100,37 @@
         }
       }
     },
+    "/api/v1/Comprobante/periodos": {
+      "post": {
+        "tags": [
+          "Comprobante"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PeriodoFacturacionCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PeriodoFacturacionCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PeriodoFacturacionCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Contifico/productos/descargar": {
       "post": {
         "tags": [
@@ -4767,6 +4798,194 @@
         }
       }
     },
+    "/api/v1/Recaudacion": {
+      "get": {
+        "tags": [
+          "Recaudacion"
+        ],
+        "parameters": [
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoRecaudacion"
+            }
+          },
+          {
+            "name": "Banco",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Texto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Recaudacion/{id}": {
+      "get": {
+        "tags": [
+          "Recaudacion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Recaudacion"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecaudacionBancariaEdicionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecaudacionBancariaEdicionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecaudacionBancariaEdicionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Recaudacion/cobros": {
+      "post": {
+        "tags": [
+          "Recaudacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RecaudacionBancariaItemDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RecaudacionBancariaItemDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RecaudacionBancariaItemDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Secuencia/crear-secuencia-ip": {
       "post": {
         "tags": [
@@ -4877,6 +5096,18 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Tareas/enriquecer-tickets-wisphub": {
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -5006,6 +5237,25 @@
         "tags": [
           "Tareas"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SincronizarFacturasWisphubRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SincronizarFacturasWisphubRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SincronizarFacturasWisphubRequestDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -8490,6 +8740,17 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Prospecto</li><li><code>1</code> = EnGestion</li><li><code>2</code> = Ganado</li><li><code>3</code> = Perdido</li></ul>",
         "format": "int32"
       },
+      "EstadoRecaudacion": {
+        "enum": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li></ul>",
+        "format": "int32"
+      },
       "EstadoValidacion": {
         "enum": [
           0,
@@ -8549,27 +8810,24 @@
         "additionalProperties": false
       },
       "FichaEquipoDto": {
-        "required": [
-          "macEquipo",
-          "modeloEquipo",
-          "serieEquipo"
-        ],
         "type": "object",
         "properties": {
           "serieEquipo": {
             "maxLength": 50,
-            "minLength": 3,
-            "type": "string"
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           },
           "modeloEquipo": {
             "maxLength": 100,
             "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "macEquipo": {
-            "minLength": 1,
-            "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$",
-            "type": "string"
+            "pattern": "^$|^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "estadoEquipo": {
             "$ref": "#/components/schemas/EstadoEquipoFicha"
@@ -8863,7 +9121,6 @@
             "nullable": true
           },
           "fichaEquipos": {
-            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FichaEquipoDto"
@@ -9452,7 +9709,6 @@
             "nullable": true
           },
           "fichaEquipos": {
-            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FichaEquipoDto"
@@ -10943,6 +11199,24 @@
           "fibra": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PeriodoFacturacionCreateDto": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mes": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -12469,6 +12743,123 @@
         },
         "additionalProperties": false
       },
+      "RecaudacionBancariaEdicionDto": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "$ref": "#/components/schemas/EstadoRecaudacion"
+          },
+          "comentario": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecaudacionBancariaItemDto": {
+        "type": "object",
+        "properties": {
+          "idSobre": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idItem": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "referenciaSobre": {
+            "type": "string",
+            "nullable": true
+          },
+          "pais": {
+            "type": "string",
+            "nullable": true
+          },
+          "banco": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formaPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "paisBancoCuenta": {
+            "type": "string",
+            "nullable": true
+          },
+          "contrapartida": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorProcc": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "moneda": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaProceso": {
+            "type": "string",
+            "nullable": true
+          },
+          "horaProceso": {
+            "type": "string",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaAdicional": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroDocumento": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipoPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroCuenta": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "noDocumento": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "estadoImpresion": {
+            "type": "string",
+            "nullable": true
+          },
+          "secuencialCobro": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numeroComprobante": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fileNameCobro": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RedesAcceso": {
         "enum": [
           "ParDeCobre",
@@ -12553,6 +12944,45 @@
           },
           "routerOnuDescripcion": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SincronizarFacturasWisphubRequestDto": {
+        "type": "object",
+        "properties": {
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "fechaEmisionInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaEmisionFin": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -14104,6 +14534,26 @@
             "type": "string",
             "nullable": true
           },
+          "fecha_emision__range_0": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fecha_emision__range_1": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fecha_vencimiento__range_0": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fecha_vencimiento__range_1": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "fecha_pago__range_0": {
             "type": "string",
             "format": "date-time",
@@ -14217,6 +14667,9 @@
     },
     {
       "name": "Proveedor"
+    },
+    {
+      "name": "Recaudacion"
     },
     {
       "name": "Secuencia"
