@@ -3346,6 +3346,68 @@
         }
       }
     },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/suspender": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Suspende el cliente del contrato en el CCR. El id de WispHub, la IP y el equipo se resuelven del servicio.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MikrotikOperacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/reactivar": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Reactiva el cliente del contrato en el CCR. El id de WispHub, la IP y el equipo se resuelven del servicio.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MikrotikOperacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/infraestructura/Nodo/crear": {
       "post": {
         "tags": [
@@ -3366,6 +3428,48 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/NodoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/Nodo/{id}": {
+      "put": {
+        "tags": [
+          "Nodo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodoUpdateDto"
               }
             }
           }
@@ -4787,6 +4891,411 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ProveedorCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/crear": {
+      "post": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/crear-rapido": {
+      "post": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedAltaRapidaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedAltaRapidaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedAltaRapidaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed": {
+      "get": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "nodoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "incluirInactivos",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/combo": {
+      "get": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "nodoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/{id}": {
+      "get": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PuntoRedUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/{id}/interfaces": {
+      "post": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterfazRedCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterfazRedCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterfazRedCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/{id}/interfaces/{interfazId}": {
+      "put": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "interfazId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterfazRedUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterfazRedUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterfazRedUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/{id}/credenciales": {
+      "post": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredencialAccesoCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredencialAccesoCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredencialAccesoCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/{id}/credenciales/{credencialId}": {
+      "put": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "credencialId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredencialAccesoUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredencialAccesoUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredencialAccesoUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/infraestructura/PuntoRed/{id}/respaldos": {
+      "post": {
+        "tags": [
+          "PuntoRed"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RespaldoConfiguracionCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RespaldoConfiguracionCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RespaldoConfiguracionCreateDto"
               }
             }
           }
@@ -6362,6 +6871,37 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/wisphub/mapeo": {
+      "post": {
+        "tags": [
+          "Wisphub"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MapeoSincroCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MapeoSincroCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MapeoSincroCreateDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -8015,6 +8555,51 @@
               "type": "string"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CredencialAccesoCreateDto": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "$ref": "#/components/schemas/TipoCredencialAcceso"
+          },
+          "usuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "puerto": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CredencialAccesoUpdateDto": {
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "$ref": "#/components/schemas/TipoCredencialAcceso"
+          },
+          "usuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "puerto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -10826,6 +11411,109 @@
         },
         "additionalProperties": false
       },
+      "InterfazRedCreateDto": {
+        "type": "object",
+        "properties": {
+          "interfazOrigenId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rol": {
+            "$ref": "#/components/schemas/RolInterfazRed"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "mascara": {
+            "type": "string",
+            "nullable": true
+          },
+          "gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "frecuenciaMhz": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "azimuth": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "aperturaGrados": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "alcanceMetros": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InterfazRedUpdateDto": {
+        "type": "object",
+        "properties": {
+          "interfazOrigenId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rol": {
+            "$ref": "#/components/schemas/RolInterfazRed"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "mascara": {
+            "type": "string",
+            "nullable": true
+          },
+          "gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "frecuenciaMhz": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "azimuth": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "aperturaGrados": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "alcanceMetros": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "InventarioOpcionDto": {
         "type": "object",
         "properties": {
@@ -10861,6 +11549,40 @@
           },
           "rememberMe": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MapeoSincroCreateDto": {
+        "type": "object",
+        "properties": {
+          "entidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "entidadIntIdInterno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entidadStringIdInterno": {
+            "type": "string",
+            "nullable": true
+          },
+          "cuentaWisphub": {
+            "type": "string",
+            "nullable": true
+          },
+          "wisphubIntId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wisphubStringId": {
+            "type": "string",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -11161,6 +11883,54 @@
           "nombre": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodoUpdateDto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "proveedorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoEstado": {
+            "$ref": "#/components/schemas/EstadoNodo"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -12729,6 +13499,159 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Nuevos</li><li><code>1</code> = Existentes</li><li><code>2</code> = Ambos</li></ul>",
         "format": "int32"
       },
+      "PuntoRedAltaRapidaDto": {
+        "type": "object",
+        "properties": {
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "padreId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "interfazAlimentacionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "activoInventarioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoPuntoRed"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "interfaz": {
+            "$ref": "#/components/schemas/InterfazRedCreateDto"
+          },
+          "credencial": {
+            "$ref": "#/components/schemas/CredencialAccesoCreateDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PuntoRedCreateDto": {
+        "type": "object",
+        "properties": {
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "padreId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "interfazAlimentacionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "activoInventarioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoPuntoRed"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PuntoRedUpdateDto": {
+        "type": "object",
+        "properties": {
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "padreId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "interfazAlimentacionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "activoInventarioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoPuntoRed"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitud": {
+            "type": "number",
+            "format": "double"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ReactivarClienteDto": {
         "required": [
           "ipCliente"
@@ -12871,6 +13794,25 @@
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = ParDeCobre</li><li><code>1</code> = Coaxial</li><li><code>2</code> = Otros</li><li><code>3</code> = FibraOptica</li><li><code>4</code> = Inalambrico</li></ul>"
       },
+      "RespaldoConfiguracionCreateDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "rutaArchivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ResponsableOpcionDto": {
         "type": "object",
         "properties": {
@@ -12888,6 +13830,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "RolInterfazRed": {
+        "enum": [
+          "Ninguno",
+          "Wan",
+          "Lan",
+          "Vlan",
+          "Pon",
+          "Radio",
+          "PuertoPasivo"
+        ],
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Wan</li><li><code>2</code> = Lan</li><li><code>3</code> = Vlan</li><li><code>4</code> = Pon</li><li><code>5</code> = Radio</li><li><code>6</code> = PuertoPasivo</li></ul>"
       },
       "SecuenciaIpCreate": {
         "type": "object",
@@ -14044,6 +14999,17 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Principal</li><li><code>2</code> = Mini</li></ul>",
         "format": "int32"
       },
+      "TipoCredencialAcceso": {
+        "enum": [
+          "Ninguno",
+          "Winbox",
+          "Ssh",
+          "Web",
+          "Snmp"
+        ],
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Winbox</li><li><code>2</code> = Ssh</li><li><code>3</code> = Web</li><li><code>4</code> = Snmp</li></ul>"
+      },
       "TipoCuadrillaTecnica": {
         "enum": [
           0,
@@ -14145,6 +15111,20 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Natural</li><li><code>1</code> = Juridica</li></ul>",
         "format": "int32"
+      },
+      "TipoPuntoRed": {
+        "enum": [
+          "Ninguno",
+          "Equipo",
+          "Olt",
+          "SwitchL2",
+          "SwitchL3",
+          "Antena",
+          "CajaMadre",
+          "Nap"
+        ],
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Equipo</li><li><code>2</code> = Olt</li><li><code>3</code> = SwitchL2</li><li><code>4</code> = SwitchL3</li><li><code>5</code> = Antena</li><li><code>6</code> = CajaMadre</li><li><code>7</code> = Nap</li></ul>"
       },
       "TipoReferencia": {
         "enum": [
@@ -14669,6 +15649,9 @@
       "name": "Proveedor"
     },
     {
+      "name": "PuntoRed"
+    },
+    {
       "name": "Recaudacion"
     },
     {
@@ -14694,6 +15677,9 @@
     },
     {
       "name": "Usuarios"
+    },
+    {
+      "name": "Wisphub"
     }
   ]
 }
