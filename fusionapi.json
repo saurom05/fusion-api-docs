@@ -15884,6 +15884,10 @@
       "SincronizarFacturasWisphubRequestDto": {
         "type": "object",
         "properties": {
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "descripcion": {
             "type": "string",
             "nullable": true
