@@ -13517,10 +13517,15 @@
           4,
           5,
           6,
-          7
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Efectivo</li><li><code>2</code> = Transferencia</li><li><code>3</code> = TarjetaCredito</li><li><code>4</code> = TarjetaDebito</li><li><code>5</code> = Cheque</li><li><code>6</code> = Recaudacion</li><li><code>7</code> = Otro</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Efectivo</li><li><code>2</code> = Transferencia</li><li><code>3</code> = TarjetaCredito</li><li><code>4</code> = TarjetaDebito</li><li><code>5</code> = Cheque</li><li><code>6</code> = Recaudacion</li><li><code>7</code> = Otro</li><li><code>8</code> = DebitoBancario</li><li><code>9</code> = Promocion</li><li><code>10</code> = ReciboPago</li><li><code>11</code> = SaldoAFavor</li><li><code>12</code> = SuspensionTemporal</li></ul>",
         "format": "int32"
       },
       "MikrotikEquipoDescargaDto": {
@@ -15760,7 +15765,23 @@
             "type": "string",
             "format": "date-time"
           },
-          "referencia": {
+          "referenciaTransaccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaRecaudacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaBanco": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaRac": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
             "type": "string",
             "nullable": true
           },
