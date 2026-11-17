@@ -142,6 +142,37 @@
         }
       }
     },
+    "/api/v1/bancos/codigos": {
+      "put": {
+        "tags": [
+          "BancoCodigoExterno"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BancoCodigoExternoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BancoCodigoExternoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BancoCodigoExternoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Bodega/ficha-tecnica/por-aprobar": {
       "get": {
         "tags": [
@@ -1131,6 +1162,116 @@
         }
       }
     },
+    "/api/v1/Comprobante/periodos/asignar": {
+      "post": {
+        "tags": [
+          "Comprobante"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarPeriodoComprobanteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarPeriodoComprobanteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarPeriodoComprobanteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsignarPeriodoComprobanteResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsignarPeriodoComprobanteResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsignarPeriodoComprobanteResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conexiones": {
+      "get": {
+        "tags": [
+          "ConexionTercero"
+        ],
+        "parameters": [
+          {
+            "name": "proveedor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConexionTercero"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConexionTerceroGuardarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConexionTerceroGuardarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConexionTerceroGuardarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/conexiones/contifico/cargar": {
+      "post": {
+        "tags": [
+          "ConexionTercero"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Contifico/productos/descargar": {
       "post": {
         "tags": [
@@ -1199,6 +1340,245 @@
         }
       }
     },
+    "/api/v1/Contifico/personas/descargar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/personas/sincronizar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaSincronizacionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaSincronizacionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaSincronizacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/personas/{personaId}": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "parameters": [
+          {
+            "name": "personaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaCreadaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaCreadaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaCreadaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/personas": {
+      "get": {
+        "tags": [
+          "Contifico"
+        ],
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoPersonaListadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/categorias/descargar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/categorias": {
+      "get": {
+        "tags": [
+          "Contifico"
+        ],
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoCategoriaListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoCategoriaListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoCategoriaListadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Contifico/productos": {
       "get": {
         "tags": [
@@ -1248,6 +1628,207 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ContificoProductoListadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/facturas/preparar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoPrepararDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoPrepararDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoPrepararDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoPreparacionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoPreparacionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoPreparacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/facturas/enviar": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoEnviarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoEnviarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoEnviarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoEnvioDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoEnvioDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoEnvioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/facturas/cobros": {
+      "post": {
+        "tags": [
+          "Contifico"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoEnviarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoEnviarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaContificoEnviarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoCobroDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoCobroDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoCobroDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/facturas": {
+      "get": {
+        "tags": [
+          "Contifico"
+        ],
+        "parameters": [
+          {
+            "name": "estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Enviada</li><li><code>3</code> = Error</li><li><code>4</code> = Omitida</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoFacturaContifico"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoListadoDto"
                 }
               }
             }
@@ -3557,6 +4138,249 @@
         }
       }
     },
+    "/api/v1/opciones": {
+      "get": {
+        "tags": [
+          "OpcionEmpresa"
+        ],
+        "parameters": [
+          {
+            "name": "clave",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OpcionEmpresa"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpcionEmpresaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpcionEmpresaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpcionEmpresaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Pago": {
+      "post": {
+        "tags": [
+          "Pago"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrarPagoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrarPagoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrarPagoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Pago/archivo": {
+      "post": {
+        "tags": [
+          "Pago"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "archivo": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "archivo": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Pago/archivo/{id}/procesar": {
+      "post": {
+        "tags": [
+          "Pago"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Pago/archivo/{id}": {
+      "get": {
+        "tags": [
+          "Pago"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Pago/{reciboId}": {
+      "patch": {
+        "tags": [
+          "Pago"
+        ],
+        "parameters": [
+          {
+            "name": "reciboId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReciboReferenciaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReciboReferenciaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReciboReferenciaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Pago/{reciboId}/imagen": {
+      "post": {
+        "tags": [
+          "Pago"
+        ],
+        "parameters": [
+          {
+            "name": "reciboId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImagenComprobanteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImagenComprobanteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImagenComprobanteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/PlanesInternet/crear": {
       "post": {
         "tags": [
@@ -5316,7 +6140,7 @@
           {
             "name": "Estado",
             "in": "query",
-            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li></ul>",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li><li><code>5</code> = ErrorRegistroPago</li><li><code>6</code> = PagadoOtroMedio</li></ul>",
             "schema": {
               "$ref": "#/components/schemas/EstadoRecaudacion"
             }
@@ -6908,6 +7732,310 @@
           }
         }
       }
+    },
+    "/api/v1/wisphub/articulos/descargar": {
+      "post": {
+        "tags": [
+          "Wisphub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContificoDescargaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wisphub/articulos": {
+      "get": {
+        "tags": [
+          "Wisphub"
+        ],
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WisphubArticuloListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WisphubArticuloListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WisphubArticuloListadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wisphub/articulos/sincronizar": {
+      "post": {
+        "tags": [
+          "Wisphub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoSincronizacionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoSincronizacionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoSincronizacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wisphub/articulos/conceptos": {
+      "get": {
+        "tags": [
+          "Wisphub"
+        ],
+        "parameters": [
+          {
+            "name": "termino",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoListadoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Wisphub"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticuloConceptoCrearDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticuloConceptoCrearDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticuloConceptoCrearDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wisphub/facturas/detalles": {
+      "post": {
+        "tags": [
+          "Wisphub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteDetalleResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteDetalleResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteDetalleResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/wisphub/articulos/conceptos/{id}": {
+      "put": {
+        "tags": [
+          "Wisphub"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticuloConceptoCodigoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticuloConceptoCodigoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticuloConceptoCodigoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticuloConceptoDto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -7319,6 +8447,149 @@
         },
         "additionalProperties": false
       },
+      "ArticuloConceptoCodigoDto": {
+        "type": "object",
+        "properties": {
+          "codigoContifico": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticuloConceptoCrearDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuidWisphub": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoContifico": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticuloConceptoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "precioCatalogo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "uuidWisphub": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoContifico": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticuloConceptoListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticuloConceptoDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticuloConceptoOmitidoDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArticuloConceptoSincronizacionDto": {
+        "type": "object",
+        "properties": {
+          "creados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actualizados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enlazados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yaEnlazados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sinProducto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalle": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticuloConceptoOmitidoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AsignacionTecnicaCreateDto": {
         "required": [
           "tecnicosIds"
@@ -7361,6 +8632,83 @@
             "items": {
               "$ref": "#/components/schemas/DatosTenicoResumenDto"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsignarPeriodoComprobanteDto": {
+        "type": "object",
+        "properties": {
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comprobanteIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "fechaEmisionDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaEmisionHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaPagoDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaPagoHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsignarPeriodoComprobanteResultadoDto": {
+        "type": "object",
+        "properties": {
+          "actualizados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mes": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BancoCodigoExternoDto": {
+        "type": "object",
+        "properties": {
+          "bancoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sistema": {
+            "$ref": "#/components/schemas/SistemaExterno"
+          },
+          "codigo": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -7548,6 +8896,42 @@
         },
         "additionalProperties": false
       },
+      "ComprobanteDetalleResultadoDto": {
+        "type": "object",
+        "properties": {
+          "comprobantes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineasCreadas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineasActualizadas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lineasDesactivadas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sinConcepto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sinJson": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recurrenteListo": {
+            "type": "boolean"
+          },
+          "otroListo": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ComprobantePagoDto": {
         "type": "object",
         "properties": {
@@ -7628,6 +9012,82 @@
         },
         "additionalProperties": false
       },
+      "ConexionTerceroGuardarDto": {
+        "type": "object",
+        "properties": {
+          "proveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "esSecreto": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoCategoriaListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContificoCategoriaStagingDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoCategoriaStagingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "padreId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoProducto": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "ContificoDescargaDto": {
         "type": "object",
         "properties": {
@@ -7646,6 +9106,140 @@
           "actualizados": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoPersonaCreadaDto": {
+        "type": "object",
+        "properties": {
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "creada": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoPersonaListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContificoPersonaStagingDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoPersonaOmitidaDto": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "identificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoPersonaSincronizacionDto": {
+        "type": "object",
+        "properties": {
+          "enlazados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yaEnlazados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "omitidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleOmitidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContificoPersonaOmitidaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContificoPersonaStagingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "cedula": {
+            "type": "string",
+            "nullable": true
+          },
+          "ruc": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefonos": {
+            "type": "string",
+            "nullable": true
+          },
+          "isProcessed": {
+            "type": "boolean"
+          },
+          "downloadedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -9236,6 +10830,16 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Actual</li><li><code>2</code> = Instalado</li><li><code>3</code> = PorCambio</li><li><code>4</code> = Danado</li></ul>",
         "format": "int32"
       },
+      "EstadoFacturaContifico": {
+        "enum": [
+          "Pendiente",
+          "Enviada",
+          "Error",
+          "Omitida"
+        ],
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Pendiente</li><li><code>2</code> = Enviada</li><li><code>3</code> = Error</li><li><code>4</code> = Omitida</li></ul>"
+      },
       "EstadoFasesProspecto": {
         "type": "object",
         "properties": {
@@ -9330,10 +10934,12 @@
           1,
           2,
           3,
-          4
+          4,
+          5,
+          6
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li><li><code>5</code> = ErrorRegistroPago</li><li><code>6</code> = PagadoOtroMedio</li></ul>",
         "format": "int32"
       },
       "EstadoValidacion": {
@@ -9390,6 +10996,267 @@
           },
           "controlaSerie": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoCobroDto": {
+        "type": "object",
+        "properties": {
+          "registrados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conError": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yaRegistrados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalle": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FacturaContificoEnvioItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comprobanteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoFacturaContifico"
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroFactura": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "subTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "descuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "iva": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "errorMensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "intentos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enviadaEn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaPagoFacturaEnvio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cobroExternalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "cobroMensaje": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoEnviarDto": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoEnvioDto": {
+        "type": "object",
+        "properties": {
+          "enviadas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conError": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "omitidas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detenido": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalle": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FacturaContificoEnvioItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoEnvioItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comprobanteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoFacturaContifico"
+          },
+          "numeroFactura": {
+            "type": "string",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FacturaContificoDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoPreparacionDto": {
+        "type": "object",
+        "properties": {
+          "pendientes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "omitidas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conError": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yaEnviadas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idsPendientes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaContificoPrepararDto": {
+        "type": "object",
+        "properties": {
+          "comprobanteIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaEmisionDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaEmisionHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaPagoDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaPagoHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -10749,6 +12616,24 @@
         },
         "additionalProperties": false
       },
+      "ImagenComprobanteDto": {
+        "type": "object",
+        "properties": {
+          "nombreArchivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "contenidoBase64": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "IncidenteDetallesDto": {
         "type": "object",
         "properties": {
@@ -11623,6 +13508,21 @@
         },
         "additionalProperties": false
       },
+      "MetodoPagoEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Efectivo</li><li><code>2</code> = Transferencia</li><li><code>3</code> = TarjetaCredito</li><li><code>4</code> = TarjetaDebito</li><li><code>5</code> = Cheque</li><li><code>6</code> = Recaudacion</li><li><code>7</code> = Otro</li></ul>",
+        "format": "int32"
+      },
       "MikrotikEquipoDescargaDto": {
         "type": "object",
         "properties": {
@@ -11967,6 +13867,24 @@
             "nullable": true
           },
           "fibra": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OpcionEmpresaDto": {
+        "type": "object",
+        "properties": {
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
             "type": "string",
             "nullable": true
           }
@@ -13783,6 +15701,32 @@
         },
         "additionalProperties": false
       },
+      "ReciboReferenciaDto": {
+        "type": "object",
+        "properties": {
+          "referenciaTransaccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaRecaudacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaBanco": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenciaRac": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RedesAcceso": {
         "enum": [
           "ParDeCobre",
@@ -13793,6 +15737,39 @@
         ],
         "type": "string",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = ParDeCobre</li><li><code>1</code> = Coaxial</li><li><code>2</code> = Otros</li><li><code>3</code> = FibraOptica</li><li><code>4</code> = Inalambrico</li></ul>"
+      },
+      "RegistrarPagoDto": {
+        "type": "object",
+        "properties": {
+          "comprobanteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bancoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formaPago": {
+            "$ref": "#/components/schemas/MetodoPagoEnum"
+          },
+          "monto": {
+            "type": "number",
+            "format": "double"
+          },
+          "fechaPago": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "RespaldoConfiguracionCreateDto": {
         "type": "object",
@@ -13942,6 +15919,15 @@
           }
         },
         "additionalProperties": false
+      },
+      "SistemaExterno": {
+        "enum": [
+          "Wisphub",
+          "Contifico",
+          "Recaudacion"
+        ],
+        "type": "string",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Wisphub</li><li><code>2</code> = Contifico</li><li><code>3</code> = Recaudacion</li></ul>"
       },
       "SubirArchivoRequestDto": {
         "type": "object",
@@ -15062,10 +17048,11 @@
           1,
           2,
           3,
-          4
+          4,
+          5
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Prospecto</li><li><code>2</code> = Contrato</li><li><code>3</code> = Ticket</li><li><code>4</code> = FichaTecnica</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Prospecto</li><li><code>2</code> = Contrato</li><li><code>3</code> = Ticket</li><li><code>4</code> = FichaTecnica</li><li><code>5</code> = ReciboPago</li></ul>",
         "format": "int32"
       },
       "TipoIdentificacion": {
@@ -15507,6 +17494,73 @@
         },
         "additionalProperties": false
       },
+      "WisphubArticuloListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WisphubArticuloStagingDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WisphubArticuloStagingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precio": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isProcessed": {
+            "type": "boolean"
+          },
+          "downloadedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "WisphubRequestFilter": {
         "type": "object",
         "properties": {
@@ -15595,6 +17649,9 @@
       "name": "Auth"
     },
     {
+      "name": "BancoCodigoExterno"
+    },
+    {
       "name": "Bodega"
     },
     {
@@ -15605,6 +17662,9 @@
     },
     {
       "name": "Comprobante"
+    },
+    {
+      "name": "ConexionTercero"
     },
     {
       "name": "Contifico"
@@ -15632,6 +17692,12 @@
     },
     {
       "name": "Nodo"
+    },
+    {
+      "name": "OpcionEmpresa"
+    },
+    {
+      "name": "Pago"
     },
     {
       "name": "PlanesInternet"
