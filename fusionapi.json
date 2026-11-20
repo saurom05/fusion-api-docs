@@ -2000,6 +2000,264 @@
         }
       }
     },
+    "/api/v1/Contrato/{id}/ficha": {
+      "get": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Ficha del cliente: nombre, cédula, contacto, dirección, nodo y estados.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoFichaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoFichaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoFichaDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Guarda la ficha del cliente. Nombre, cédula, correo y teléfono se actualizan en la persona.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoFichaUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoFichaUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoFichaUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoFichaDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoFichaDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoFichaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contrato/{id}/servicio-red": {
+      "get": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "IP, MAC e interfaz del servicio. No llama a MikroTik.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoServicioRedDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoServicioRedDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoServicioRedDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Guarda IP, MAC e interfaz. La máscara se almacena como prefijo (24). No llama a MikroTik.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoServicioRedUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoServicioRedUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratoServicioRedUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoServicioRedDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoServicioRedDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoServicioRedDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contrato/{id}/aplicar-datos-renovacion": {
+      "post": {
+        "tags": [
+          "Contrato"
+        ],
+        "summary": "Copia IP, MAC e interfaz reales al contrato anterior y al renovado. No llama a MikroTik.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AplicarDatosRenovacionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AplicarDatosRenovacionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AplicarDatosRenovacionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AplicarDatosRenovacionResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AplicarDatosRenovacionResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AplicarDatosRenovacionResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Contrato/{id}": {
       "put": {
         "tags": [
@@ -4042,6 +4300,161 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MikrotikOperacionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/leases-dinamicos": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Leases DHCP dinámicos del CCR que alimenta el contrato. El id del equipo se resuelve con la IP de gestión.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeasesDinamicosDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/crear-lease": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Crea el lease del cliente en el CCR del contrato. La MAC, la IP y el plan se leen del servicio.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrearLeaseResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/activar-desde-cuarentena": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Activa el cliente en el CCR sacándolo de cuarentena. La MAC, la IP y el plan se leen del servicio.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivarCuarentenaResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/actualizar-cliente": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Actualiza el cliente en el CCR del contrato. El nombre, la IP, la MAC y el plan se leen del servicio.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActualizarClienteResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/eliminar-cliente": {
+      "post": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Elimina el cliente del CCR del contrato. El equipo se resuelve del servicio y a MikroTik solo se envía el id del contrato.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EliminarClienteResultadoDto"
                 }
               }
             }
@@ -7342,6 +7755,14 @@
             }
           },
           {
+            "name": "ContratoDetalleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
             "name": "EstadosIds",
             "in": "query",
             "schema": {
@@ -8303,6 +8724,47 @@
   },
   "components": {
     "schemas": {
+      "ActivarCuarentenaResultadoDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ip_asignada": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac_address": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "$ref": "#/components/schemas/CrearLeaseDetalleDto"
+          },
+          "cliente": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ActividadTecaCreateDto": {
         "type": "object",
         "properties": {
@@ -8543,6 +9005,39 @@
         },
         "additionalProperties": false
       },
+      "ActualizarClienteResultadoDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id_cliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cambios_aplicados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AdicionalCreateDto": {
         "type": "object",
         "properties": {
@@ -8706,6 +9201,76 @@
             "type": "string",
             "nullable": true,
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AplicarDatosRenovacionDto": {
+        "type": "object",
+        "properties": {
+          "contratoNuevoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipv4Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipv4Mask": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "interfazRedId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AplicarDatosRenovacionResultadoDto": {
+        "type": "object",
+        "properties": {
+          "contratoAnteriorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleAnteriorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoNuevoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleNuevoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipv4Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "interfazRedId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "listoParaMikrotik": {
+            "type": "boolean"
+          },
+          "motivos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -9791,6 +10356,192 @@
         },
         "additionalProperties": false
       },
+      "ContratoFichaDto": {
+        "type": "object",
+        "properties": {
+          "contratoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroContrato": {
+            "type": "string",
+            "nullable": true
+          },
+          "personaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "direccionInstalacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "provinciaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "provinciaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantonDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "parroquiaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudadDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "contratoEstado": {
+            "$ref": "#/components/schemas/EstadoContrato"
+          },
+          "estadoCliente": {
+            "$ref": "#/components/schemas/EstadoClienteServicio"
+          },
+          "estadoClienteAdicional": {
+            "$ref": "#/components/schemas/EstadoClienteAdicionalServicio"
+          },
+          "facturable": {
+            "type": "boolean"
+          },
+          "personaEstado": {
+            "$ref": "#/components/schemas/EstadoPersona"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoFichaUpdateDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "coordenadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "provinciaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parroquiaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ciudadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoEstado": {
+            "$ref": "#/components/schemas/EstadoContrato"
+          },
+          "estadoCliente": {
+            "$ref": "#/components/schemas/EstadoClienteServicio"
+          },
+          "estadoClienteAdicional": {
+            "$ref": "#/components/schemas/EstadoClienteAdicionalServicio"
+          },
+          "facturable": {
+            "type": "boolean"
+          },
+          "personaEstado": {
+            "$ref": "#/components/schemas/EstadoPersona"
+          }
+        },
+        "additionalProperties": false
+      },
       "ContratoFilter": {
         "type": "object",
         "properties": {
@@ -10219,6 +10970,113 @@
         },
         "additionalProperties": false
       },
+      "ContratoServicioRedDto": {
+        "type": "object",
+        "properties": {
+          "contratoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroContrato": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicioInternetDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipv4Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipv4Mask": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "interfazRedId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "interfazNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "puntoRedId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "puntoRedNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodoIdInterfaz": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodoIdDireccion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipoNombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "wisphubServiceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "listoParaMikrotik": {
+            "type": "boolean"
+          },
+          "motivos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContratoServicioRedUpdateDto": {
+        "type": "object",
+        "properties": {
+          "ipv4Address": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipv4Mask": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "interfazRedId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "ContratoSoporteDto": {
         "type": "object",
         "properties": {
@@ -10412,6 +11270,91 @@
               "type": "string"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearLeaseColasDto": {
+        "type": "object",
+        "properties": {
+          "modo": {
+            "type": "string",
+            "nullable": true
+          },
+          "mangle_detectado": {
+            "type": "boolean"
+          },
+          "creadas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "existentes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "plan_aplicado": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan_speedtest": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearLeaseDetalleDto": {
+        "type": "object",
+        "properties": {
+          "lease": {
+            "type": "string",
+            "nullable": true
+          },
+          "queues": {
+            "$ref": "#/components/schemas/CrearLeaseColasDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrearLeaseResultadoDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ip_asignada": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac_address": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalles": {
+            "$ref": "#/components/schemas/CrearLeaseDetalleDto"
           }
         },
         "additionalProperties": false
@@ -11019,6 +11962,73 @@
         },
         "additionalProperties": false
       },
+      "EliminarClienteDetalleDto": {
+        "type": "object",
+        "properties": {
+          "colas_eliminadas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "leases_eliminados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EliminarClienteLeaseDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EliminarClienteLeaseDto": {
+        "type": "object",
+        "properties": {
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac": {
+            "type": "string",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EliminarClienteResultadoDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id_cliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalles": {
+            "$ref": "#/components/schemas/EliminarClienteDetalleDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "EmpresaCreateDto": {
         "type": "object",
         "properties": {
@@ -11101,6 +12111,35 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Pendiente</li><li><code>1</code> = Agendada</li><li><code>2</code> = ReAgendada</li><li><code>3</code> = Completada</li><li><code>4</code> = Aprobada</li><li><code>5</code> = Cancelada</li><li><code>6</code> = EnSitio</li></ul>",
         "format": "int32"
       },
+      "EstadoClienteAdicionalServicio": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Inactivo</li><li><code>1</code> = ActivoInstalado</li><li><code>2</code> = ActivoRecuperado</li><li><code>3</code> = ActivoFijo</li><li><code>4</code> = ActivoCompromiso</li><li><code>5</code> = SuspendidoHistorico</li><li><code>6</code> = SuspendidoReciente</li><li><code>7</code> = Cancelado</li><li><code>8</code> = Gratis</li><li><code>9</code> = PorActivar</li></ul>",
+        "format": "int32"
+      },
+      "EstadoClienteServicio": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Inactivo</li><li><code>1</code> = Activo</li><li><code>2</code> = Suspendido</li><li><code>3</code> = Cancelado</li><li><code>4</code> = Gratis</li></ul>",
+        "format": "int32"
+      },
       "EstadoContrato": {
         "enum": [
           0,
@@ -11111,10 +12150,11 @@
           5,
           6,
           7,
-          8
+          8,
+          9
         ],
         "type": "integer",
-        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = EnRevision</li><li><code>1</code> = Pendiente</li><li><code>2</code> = PorInstalar</li><li><code>3</code> = Activo</li><li><code>4</code> = Suspendido</li><li><code>5</code> = Anulado</li><li><code>6</code> = Cancelado</li><li><code>7</code> = Terminado</li><li><code>8</code> = Renovado</li></ul>",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = EnRevision</li><li><code>1</code> = Pendiente</li><li><code>2</code> = PorInstalar</li><li><code>3</code> = Activo</li><li><code>4</code> = Suspendido</li><li><code>5</code> = Anulado</li><li><code>6</code> = Cancelado</li><li><code>7</code> = Terminado</li><li><code>8</code> = Renovado</li><li><code>9</code> = PorTerminar</li></ul>",
         "format": "int32"
       },
       "EstadoEgreso": {
@@ -13805,6 +14845,69 @@
         },
         "additionalProperties": false
       },
+      "LeaseDinamicoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "mac_address": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip_temporal": {
+            "type": "string",
+            "nullable": true
+          },
+          "host_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "server": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_seen": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeasesDinamicosDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leases_dinamicos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LeaseDinamicoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDto": {
         "required": [
           "password",
@@ -14726,6 +15829,18 @@
             "minimum": 0.01,
             "type": "number",
             "format": "double"
+          },
+          "queueTypeSubida": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "queueTypeBajada": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -14855,6 +15970,18 @@
             "minimum": 0.01,
             "type": "number",
             "format": "double"
+          },
+          "queueTypeSubida": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "queueTypeBajada": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           },
           "id": {
             "type": "integer",
