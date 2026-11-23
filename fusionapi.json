@@ -4980,7 +4980,7 @@
         "tags": [
           "NetworkDevice"
         ],
-        "summary": "Leases DHCP dinámicos del CCR que alimenta el contrato. El id del equipo se resuelve con la IP de gestión.",
+        "summary": "Leases DHCP dinámicos del CCR de la zona del contrato. Devuelve todas las filas del equipo.",
         "parameters": [
           {
             "name": "contratoDetalleId",
@@ -4999,6 +4999,37 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LeasesDinamicosDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/dhcp": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Equipos DHCP del CCR de la zona del contrato. Cada fila trae el cliente de Fusion si la MAC o la IP coinciden.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DhcpEquiposDto"
                 }
               }
             }
@@ -12104,6 +12135,109 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = AtencionCliente</li><li><code>1</code> = SoporteTecnico</li><li><code>2</code> = Ventas</li><li><code>3</code> = Administracion</li><li><code>4</code> = Sistemas</li></ul>",
         "format": "int32"
+      },
+      "DhcpClienteDto": {
+        "type": "object",
+        "properties": {
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroContrato": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "dni": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipRegistrada": {
+            "type": "string",
+            "nullable": true
+          },
+          "macRegistrada": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DhcpEquipoDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "activeAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "macAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "activeMacAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "hostName": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastSeen": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/DhcpClienteDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DhcpEquiposDto": {
+        "type": "object",
+        "properties": {
+          "equipoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dhcp": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DhcpEquipoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "EditarPagoDto": {
         "type": "object",
