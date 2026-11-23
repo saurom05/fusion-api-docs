@@ -3660,6 +3660,674 @@
         }
       }
     },
+    "/api/v1/Impago/estados": {
+      "get": {
+        "tags": [
+          "Impago"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Impago": {
+      "get": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = PorGestionar</li><li><code>2</code> = IncumplimientoCompromiso</li><li><code>3</code> = PagoADestiempo</li><li><code>4</code> = ClienteRecuperado</li><li><code>5</code> = GestionadoSinRespuesta</li><li><code>6</code> = DevolverLlamada</li><li><code>7</code> = RetiroEquipos</li><li><code>8</code> = CompromisoPago</li><li><code>9</code> = Buro</li><li><code>10</code> = Gestionado</li><li><code>11</code> = CancelaServicio</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoImpago"
+            }
+          },
+          {
+            "name": "NodoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Corte",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoDetalleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Dni",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Texto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OperadorId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FechaIngresoDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaIngresoHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ProximaGestionDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ProximaGestionHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "SoloAbiertos",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "LimitePorColumna",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Impago"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoCrearDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoCrearDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoCrearDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Impago/kanban": {
+      "get": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = PorGestionar</li><li><code>2</code> = IncumplimientoCompromiso</li><li><code>3</code> = PagoADestiempo</li><li><code>4</code> = ClienteRecuperado</li><li><code>5</code> = GestionadoSinRespuesta</li><li><code>6</code> = DevolverLlamada</li><li><code>7</code> = RetiroEquipos</li><li><code>8</code> = CompromisoPago</li><li><code>9</code> = Buro</li><li><code>10</code> = Gestionado</li><li><code>11</code> = CancelaServicio</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoImpago"
+            }
+          },
+          {
+            "name": "NodoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Corte",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoDetalleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Dni",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Texto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OperadorId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FechaIngresoDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaIngresoHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ProximaGestionDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ProximaGestionHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "SoloAbiertos",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "LimitePorColumna",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Impago/candidatos": {
+      "get": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "Estado",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = PorGestionar</li><li><code>2</code> = IncumplimientoCompromiso</li><li><code>3</code> = PagoADestiempo</li><li><code>4</code> = ClienteRecuperado</li><li><code>5</code> = GestionadoSinRespuesta</li><li><code>6</code> = DevolverLlamada</li><li><code>7</code> = RetiroEquipos</li><li><code>8</code> = CompromisoPago</li><li><code>9</code> = Buro</li><li><code>10</code> = Gestionado</li><li><code>11</code> = CancelaServicio</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/EstadoImpago"
+            }
+          },
+          {
+            "name": "NodoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Corte",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoDetalleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Dni",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Texto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OperadorId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FechaIngresoDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaIngresoHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ProximaGestionDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ProximaGestionHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "SoloAbiertos",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "LimitePorColumna",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Filtro",
+            "in": "query",
+            "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Todos</li><li><code>1</code> = Activos</li><li><code>2</code> = Inactivos</li></ul>",
+            "schema": {
+              "$ref": "#/components/schemas/FiltroEstado"
+            }
+          },
+          {
+            "name": "EmpresaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RegistrosPorPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumeroPagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "soloVencidos",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Impago/{id}": {
+      "get": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoActualizarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoActualizarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoActualizarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Impago/generar": {
+      "post": {
+        "tags": [
+          "Impago"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoGenerarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoGenerarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoGenerarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Impago/{id}/estado": {
+      "patch": {
+        "tags": [
+          "Impago"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoCambiarEstadoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoCambiarEstadoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpagoCambiarEstadoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/Ingreso/catalogos": {
       "get": {
         "tags": [
@@ -11613,7 +12281,7 @@
           },
           "cantidad": {
             "maximum": 999999999,
-            "minimum": 0.01,
+            "minimum": 1,
             "type": "number",
             "format": "double"
           },
@@ -11713,7 +12381,7 @@
         "properties": {
           "cantidad": {
             "maximum": 999999999,
-            "minimum": 0.01,
+            "minimum": 1,
             "type": "number",
             "format": "double"
           },
@@ -12231,6 +12899,24 @@
         ],
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Solicitada</li><li><code>2</code> = Devuelta</li><li><code>3</code> = Autorizada</li><li><code>4</code> = Anulada</li></ul>",
+        "format": "int32"
+      },
+      "EstadoImpago": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "type": "integer",
+        "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = PorGestionar</li><li><code>2</code> = IncumplimientoCompromiso</li><li><code>3</code> = PagoADestiempo</li><li><code>4</code> = ClienteRecuperado</li><li><code>5</code> = GestionadoSinRespuesta</li><li><code>6</code> = DevolverLlamada</li><li><code>7</code> = RetiroEquipos</li><li><code>8</code> = CompromisoPago</li><li><code>9</code> = Buro</li><li><code>10</code> = Gestionado</li><li><code>11</code> = CancelaServicio</li></ul>",
         "format": "int32"
       },
       "EstadoIngreso": {
@@ -13842,7 +14528,7 @@
           },
           "cantidad": {
             "maximum": 999999999,
-            "minimum": 0.01,
+            "minimum": 1,
             "type": "number",
             "format": "double"
           }
@@ -14057,6 +14743,115 @@
           },
           "contentType": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImpagoActualizarDto": {
+        "type": "object",
+        "properties": {
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "operadorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaProximaGestion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCompromisoPago": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "montoComprometido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "registrarIntento": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImpagoCambiarEstadoDto": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "$ref": "#/components/schemas/EstadoImpago"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaProximaGestion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCompromisoPago": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "montoComprometido": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImpagoCrearDto": {
+        "type": "object",
+        "properties": {
+          "contratoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comprobanteIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "operadorId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ImpagoGenerarDto": {
+        "type": "object",
+        "properties": {
+          "nodoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soloVencidos": {
+            "type": "boolean"
+          },
+          "tope": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -14379,7 +15174,7 @@
           },
           "cantidad": {
             "maximum": 999999999,
-            "minimum": 0.01,
+            "minimum": 1,
             "type": "number",
             "format": "double"
           },
@@ -14505,7 +15300,7 @@
         "properties": {
           "cantidad": {
             "maximum": 999999999,
-            "minimum": 0.01,
+            "minimum": 1,
             "type": "number",
             "format": "double"
           },
@@ -19220,6 +20015,9 @@
     },
     {
       "name": "GuiaRemision"
+    },
+    {
+      "name": "Impago"
     },
     {
       "name": "Ingreso"
