@@ -1043,6 +1043,83 @@
         }
       }
     },
+    "/api/v1/Clientes/columnas": {
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Columnas visibles de la lista de clientes para el usuario de la sesión.\r\nSi todavía no guardó una preferencia, devuelve el catálogo por defecto.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Guarda visibilidad y orden de las columnas de la lista de clientes.\r\nEl cuerpo debe incluir todas las columnas del catálogo.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Clientes/columnas/restablecer": {
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Borra la preferencia del usuario y devuelve las columnas por defecto.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Comprobante": {
       "get": {
         "tags": [
@@ -1131,6 +1208,80 @@
         }
       }
     },
+    "/api/v1/Comprobante/columnas": {
+      "get": {
+        "tags": [
+          "Comprobante"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Comprobante"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Comprobante/columnas/restablecer": {
+      "post": {
+        "tags": [
+          "Comprobante"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Comprobante/periodos": {
       "post": {
         "tags": [
@@ -1158,6 +1309,201 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/Comprobante/generar/omisiones": {
+      "get": {
+        "tags": [
+          "Comprobante"
+        ],
+        "summary": "Crea los comprobantes del periodo. Sin servicios, toma los que cortan hoy. Con una lista, genera solo esos.\r\nFechaEmision queda en el comprobante; si no se envía, se usa la fecha actual.",
+        "parameters": [
+          {
+            "name": "PeriodoFacturacionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ContratoDetalleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Motivo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Tamano",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteOmisionListadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteOmisionListadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteOmisionListadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Comprobante/generar": {
+      "post": {
+        "tags": [
+          "Comprobante"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprobanteGenerarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprobanteGenerarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprobanteGenerarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteGenerarResultadoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteGenerarResultadoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteGenerarResultadoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Comprobante/{id}/anular": {
+      "post": {
+        "tags": [
+          "Comprobante"
+        ],
+        "summary": "Cancela un comprobante generado en Fusion y devuelve la cuota, el mes del beneficio y el saldo a favor que consumió.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprobanteAnularDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprobanteAnularDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComprobanteAnularDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteAnuladoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteAnuladoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComprobanteAnuladoDto"
+                }
+              }
+            }
           }
         }
       }
@@ -1832,6 +2178,47 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FacturaContificoCobroPendientesDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Contifico/facturas/{id}/consultar": {
+      "get": {
+        "tags": [
+          "Contifico"
+        ],
+        "summary": "Lee de nuevo el documento en Contifico y guarda saldo, saldo de anticipo y la fecha de esa lectura.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturaContificoDto"
                 }
               }
             }
@@ -5161,6 +5548,68 @@
         }
       }
     },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/sxt/estado": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Estado de la antena SXT del servicio. El equipo y la IP se resuelven del contrato.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoSxtDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/trafico-vivo": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Tráfico en vivo de la cola del cliente. El id enviado a MikroTik es el ContratoDetalleId.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TraficoVivoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/infraestructura/Nodo/crear": {
       "post": {
         "tags": [
@@ -6691,6 +7140,59 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/PromesaPago": {
+      "get": {
+        "tags": [
+          "PromesaPago"
+        ],
+        "summary": "Historial de promesas de un servicio. También cierra la vigente si ya venció con saldo o si la deuda quedó en cero.",
+        "parameters": [
+          {
+            "name": "contratoDetalleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PromesaPago"
+        ],
+        "summary": "Otorga una promesa a partir de uno o más comprobantes del mismo servicio.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromesaPagoCrearDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromesaPagoCrearDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromesaPagoCrearDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -8530,6 +9032,80 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TicketSoporteDtoPagedResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/columnas": {
+      "get": {
+        "tags": [
+          "Ticket"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Ticket"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardarColumnasVistaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Ticket/columnas/restablecer": {
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColumnasVistaDto"
                 }
               }
             }
@@ -10423,6 +10999,121 @@
         },
         "additionalProperties": false
       },
+      "ColumnaVistaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "campo": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "visible": {
+            "type": "boolean"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColumnaVistaGuardarDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "campo": {
+            "type": "string",
+            "nullable": true
+          },
+          "visible": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ColumnasVistaDto": {
+        "type": "object",
+        "properties": {
+          "vista": {
+            "type": "string",
+            "nullable": true
+          },
+          "personalizada": {
+            "type": "boolean"
+          },
+          "columnas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnaVistaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteAnuladoDto": {
+        "type": "object",
+        "properties": {
+          "comprobanteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "beneficiosDevueltos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cargosDevueltos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saldosDevueltos": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteAnularDto": {
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ComprobanteDetalleResultadoDto": {
         "type": "object",
         "properties": {
@@ -10455,6 +11146,192 @@
           },
           "otroListo": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteGeneradoDto": {
+        "type": "object",
+        "properties": {
+          "comprobanteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "saldoPendiente": {
+            "type": "number",
+            "format": "double"
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicioSuspendido": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteGenerarDto": {
+        "type": "object",
+        "properties": {
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "contratoDetalleIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteGenerarResultadoDto": {
+        "type": "object",
+        "properties": {
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "anio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diaCorteAplicado": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "creados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "omitidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "suspendidos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "generados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComprobanteGeneradoDto"
+            },
+            "nullable": true
+          },
+          "omisiones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComprobanteOmitidoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteOmisionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lote": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "periodoFacturacionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteOmisionListadoDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComprobanteOmisionDto"
+            },
+            "nullable": true
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paginaActual": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrosPorPagina": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComprobanteOmitidoDto": {
+        "type": "object",
+        "properties": {
+          "contratoDetalleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "motivo": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -13110,6 +13987,126 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>1</code> = Nuevo</li><li><code>2</code> = NoConsolidado</li><li><code>3</code> = Consolidado</li><li><code>4</code> = Otro</li><li><code>5</code> = ErrorRegistroPago</li><li><code>6</code> = PagadoOtroMedio</li></ul>",
         "format": "int32"
       },
+      "EstadoSxtDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "nodo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip_sxt": {
+            "type": "string",
+            "nullable": true
+          },
+          "conectado": {
+            "type": "boolean"
+          },
+          "radio": {
+            "$ref": "#/components/schemas/EstadoSxtRadioDto"
+          },
+          "senal": {
+            "$ref": "#/components/schemas/EstadoSxtSenalDto"
+          },
+          "trafico_actual": {
+            "$ref": "#/components/schemas/EstadoSxtTraficoDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstadoSxtRadioDto": {
+        "type": "object",
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "nullable": true
+          },
+          "frecuencia_mhz": {
+            "type": "string",
+            "nullable": true
+          },
+          "ancho_canal": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre_radio": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstadoSxtSenalDto": {
+        "type": "object",
+        "properties": {
+          "signal_strength": {
+            "type": "string",
+            "nullable": true
+          },
+          "ch0": {
+            "type": "string",
+            "nullable": true
+          },
+          "ch1": {
+            "type": "string",
+            "nullable": true
+          },
+          "snr": {
+            "type": "string",
+            "nullable": true
+          },
+          "tx_ccq": {
+            "type": "string",
+            "nullable": true
+          },
+          "rx_ccq": {
+            "type": "string",
+            "nullable": true
+          },
+          "tx_rate": {
+            "type": "string",
+            "nullable": true
+          },
+          "rx_rate": {
+            "type": "string",
+            "nullable": true
+          },
+          "uptime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstadoSxtTraficoDto": {
+        "type": "object",
+        "properties": {
+          "rx_bps": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tx_bps": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "rx_mbps": {
+            "type": "number",
+            "format": "double"
+          },
+          "tx_mbps": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "EstadoValidacion": {
         "enum": [
           0,
@@ -13274,6 +14271,21 @@
           "total": {
             "type": "number",
             "format": "double"
+          },
+          "saldoContifico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "saldoAnticipoContifico": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "saldoConsultadoEn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "errorMensaje": {
             "type": "string",
@@ -14448,6 +15460,19 @@
         "type": "integer",
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguna</li><li><code>1</code> = PendientePago</li><li><code>2</code> = Pagada</li><li><code>3</code> = Cancelada</li><li><code>4</code> = EnRevision</li><li><code>5</code> = SeTransfirio</li><li><code>6</code> = PagoParcial</li></ul>",
         "format": "int32"
+      },
+      "GuardarColumnasVistaRequest": {
+        "type": "object",
+        "properties": {
+          "columnas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnaVistaGuardarDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "GuiaRemisionContextoDto": {
         "type": "object",
@@ -17110,6 +18135,32 @@
         },
         "additionalProperties": false
       },
+      "PromesaPagoCrearDto": {
+        "type": "object",
+        "properties": {
+          "comprobanteIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "fechaCorte": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "montoComprometido": {
+            "type": "number",
+            "format": "double"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PromocionDescuentoCrearDto": {
         "type": "object",
         "properties": {
@@ -19610,6 +20661,60 @@
         "description": "<p><b>Valores disponibles:</b></p><ul><li><code>0</code> = Ninguno</li><li><code>1</code> = Internet</li><li><code>2</code> = Television</li><li><code>3</code> = Seguridad</li><li><code>4</code> = Rastreo</li></ul>",
         "format": "int32"
       },
+      "TraficoVivoDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "id_cliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cola": {
+            "type": "string",
+            "nullable": true
+          },
+          "target": {
+            "type": "string",
+            "nullable": true
+          },
+          "subida_bps": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "descarga_bps": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "subida_mbps": {
+            "type": "number",
+            "format": "double"
+          },
+          "descarga_mbps": {
+            "type": "number",
+            "format": "double"
+          },
+          "plan_subida_mbps": {
+            "type": "number",
+            "format": "double"
+          },
+          "plan_descarga_mbps": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "UsuarioCreateDto": {
         "required": [
           "documentoIdentidad",
@@ -20176,6 +21281,9 @@
     },
     {
       "name": "Planificacion"
+    },
+    {
+      "name": "PromesaPago"
     },
     {
       "name": "Promociones"
