@@ -5787,6 +5787,68 @@
         }
       }
     },
+    "/api/v1/NetworkDevice/equipos/wan/combo": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Combo de CCR con interfaz WAN. El id es el de PuntosRed y la descripcion junta el nombre del punto con la IP de la interfaz.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PuntoRedWanComboDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/NetworkDevice/equipos/{id}/sxt/{ip}/estado": {
+      "get": {
+        "tags": [
+          "NetworkDevice"
+        ],
+        "summary": "Estado de la antena SXT. El id es el del CCR: de ahí se toma la IP de gestión para ubicar el equipo en MikroTik. La IP de la ruta es la de la antena.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ip",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoSxtDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/NetworkDevice/contratos/{contratoDetalleId}/sxt/estado": {
       "get": {
         "tags": [
@@ -19832,6 +19894,24 @@
           },
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PuntoRedWanComboDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idInterfaz": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
